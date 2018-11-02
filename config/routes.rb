@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
  
- root 'mains#home'
+  devise_for :users 
+  resources :users do
+   resources :folders
+  end
+  root 'mains#home'
 
 end
