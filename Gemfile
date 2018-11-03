@@ -6,7 +6,6 @@ gem 'rails', '~> 5.2.1'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'puma', '~> 3.11'
-gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery'
@@ -19,6 +18,7 @@ gem 'bootstrap-table-rails', '~> 1.12', '>= 1.12.1'
 gem 'jquery-turbolinks', '~> 2.1'
 gem 'will_paginate', '~> 3.1.1'
 gem 'glyphicons-rails', '~> 0.1.2'
+gem 'google-api-client', '~> 0.24.3'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
