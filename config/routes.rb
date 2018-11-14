@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   resources :users do
    resources :folders
   end
-  root 'mains#home'
-
+  root 'static_pages#home'
+  get '/home', to: 'static_pages#home'
 end

@@ -18,7 +18,9 @@ gem 'bootstrap-table-rails', '~> 1.12', '>= 1.12.1'
 gem 'jquery-turbolinks', '~> 2.1'
 gem 'will_paginate', '~> 3.1.1'
 gem 'glyphicons-rails', '~> 0.1.2'
+gem 'mini_magick'
 gem 'google-api-client', '~> 0.24.3'
+gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
