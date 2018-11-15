@@ -2,15 +2,13 @@ require "csv"
 
 class FileCollection
 
-
-
   def collect_in_folder(user, file_path)
-    client = DropboxClient.new(access_token)
+    Drive = Google::Apis::DriveV2
+    client = Drive::DriveService.new(access_token)
     CSV.open(file_path, csv_options) do |csv|
       File.all.each do |file|
         file, metadata = client.get_file_and_metadata(file_path)
-open(file, 'w')
-
+        open(file, 'w')
         csv << [file.title, file.description]
       end
     end
