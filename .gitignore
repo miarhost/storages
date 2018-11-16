@@ -31,6 +31,3 @@
 /config/master.key
 # Ignore Google Drive secret
 /config/application.yml
-
-.env
-/.env
