@@ -32,7 +32,7 @@ class FoldersController < ApplicationController
   respond_to do |format|
   	if @folder.update
   	 format.html { redirect_to @folder, notice: 'Folder is successfully updated' }
-  	 format.json { render json: :show, status: :ok, location @folder }
+  	 format.json { render json: :show, status: :ok, location: @folder }
   	else
   	 format.html { render :new }
   	 format.json { render json: @folder.errors, status: :unprocessable_entity }
