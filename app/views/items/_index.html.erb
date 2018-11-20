@@ -1,0 +1,26 @@
+<h1>Your Files </h1>
+
+<table data-toggle="table" width = "100%" border="0" cellspacing="0" cellpadding="0">
+ <thead style="background-color: none; font-family: 'Mark Pro'; font-size: 11px">
+  <tr class="text gray">
+   <th>File</th>
+   <th data-sortable="true">Uploaded at</th>
+   <th>Size</th>
+  </tr>
+ </thead>
+
+ <tbody>
+  <% @items.each do |item| %>
+   <tr>
+   	<td><%= item.attachment %></td>
+    <td><%= item.attachment.updated_at  %></td>
+    <td><%= item.attachment.size %></td>
+    <td><%= link_to 'Show', item %></td>
+    <td><%= link_to 'Edit', edit_item_path(item) %></td>
+    <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+   </tr>   
+  <% end %>
+ </tbody>
+</table>
+
+<%= link_to 'New Item', new_item_path %>

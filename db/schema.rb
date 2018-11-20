@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_14_201413) do
+ActiveRecord::Schema.define(version: 2018_11_15_131722) do
 
   create_table "folders", force: :cascade do |t|
     t.string "title"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 2018_11_14_201413) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "provider"
+    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

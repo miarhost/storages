@@ -1,1 +1,26 @@
 <h1>Folders</h1>
+
+<table data-toggle="table" width = "100%" border="0" cellspacing="0" cellpadding="0">
+ <thead style="background-color: none; font-family: 'Mark Pro'; font-size: 11px">
+  <tr class="text gray">
+   <th>Title</th>
+   <th data-sortable="true">Description</th>
+   <th>Items</th>
+  </tr>
+ </thead>
+
+ <tbody>
+  <% @folders.each do |folder| %>
+   <tr>
+   	<td><%= folder.title %></td>
+    <td><%= folder.description %></td>
+    <td><%= folder.filenum %></td>
+    <td><%= link_to 'Show', folder %></td>
+    <td><%= link_to 'Edit', edit_folder_path(folder) %></td>
+    <td><%= link_to 'Destroy', folder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+   </tr>   
+  <% end %>
+ </tbody>
+</table>
+
+<%= link_to 'New Folder', new_folder_path %>

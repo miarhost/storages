@@ -1,0 +1,10 @@
+<%= form_with(model: item) do |form| %>
+
+  <div class="field">
+    <%= form.label :your_file %>
+    <%= form.file_field :attachment, id: :item_attachment %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

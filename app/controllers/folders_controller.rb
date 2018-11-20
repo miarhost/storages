@@ -55,7 +55,7 @@ class FoldersController < ApplicationController
   end
 
   def set_folder 
-   @folder = Folder.new(params[:id])
+   @folder = Folder.find(params[:id])
   end
 end
 
