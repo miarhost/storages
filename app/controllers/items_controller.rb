@@ -1,11 +1,19 @@
 class ItemsController < ApplicationController
 
 before_action :authenticate_user!
+ 
+ def new
+ 	@item = Item.new
+ end
+
+ def show
+ 	@item = Item.find(params[:id])
+ end
 
  def create
-  @item = Services::Items::Builder.call(params)
+  @item = ItemUploaderService.call({item: resource}).perform
   if @item.save
-  flash[:success]="File added to your folder"
+  flash[:success] = "File added to your folder"
   else
   redirect_to folder_path(@folder)
   end
