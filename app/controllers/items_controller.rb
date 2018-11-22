@@ -1,6 +1,10 @@
 class ItemsController < ApplicationController
-
+skip_before_action :verify_authenticity_token
 before_action :authenticate_user!
+ 
+ def index
+ 	@items = Item.all
+ end
  
  def new
  	@item = Item.new
@@ -11,7 +15,7 @@ before_action :authenticate_user!
  end
 
  def create
-  @item = ItemUploaderService.call({item: resource}).perform
+  @item = AttachmentUploaderService.call(params[:attachment])
   if @item.save
   flash[:success] = "File added to your folder"
   else

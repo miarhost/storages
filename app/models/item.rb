@@ -1,4 +1,4 @@
-require 'net/http/post/multipart'
+
 
 class Item < ApplicationRecord
  

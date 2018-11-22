@@ -1,23 +1,29 @@
 require 'google/apis/drive_v2'
 
-class ItemUploaderService
- 
- def initialize(params)
- 	@item = params[:item]
- 	end
+class AttachmentUploaderService < ApplicationService
 
- def perform 
-   upload_attachment
+  Drive = Google::Apis::DriveV2
+
+  attr_reader :attachment 
+
+ def initialize(params)
+ 	@attachment = params[:attachment]
+  @folder = params[:folder]
+ end
+
+ def call
+   drive_setup
+   item_setup
  end
   
  private 
 
- def upload_attachment
- 	drive_setup
- end
+  def item_setup
+    @item.folder_id = @folder.id
+    @item.save
+  end
 
  def drive_setup
-  Drive = Google::Apis::DriveV2 # Alias the module
   drive = Drive::DriveService.new
   drive.authorization =  OAuth2::Client.new('x', 'x', :site => 'https://accounts.google.com')
   oauth2_object = OAuth2::AccessToken.new(client, auth.token)
@@ -28,11 +34,11 @@ class ItemUploaderService
    puts file.title
   end
   # Upload a file
- metadata = Drive::File.new(title: 'My document')
- metadata = drive.insert_file(metadata, upload_source: 'test.txt', content_type: 'text/plain')
- @item.attachment = metadata
+  @attachment = Drive::File.new(title: 'My document')
+  @attachment = drive.insert_file(metadata, upload_source: 'test.txt', content_type: 'text/plain')
+
 # Download a file
- drive.get_file(metadata.id, download_dest: '/tmp/myfile.txt')
+ drive.get_file(@attachment, download_dest: '/tmp/myfile.txt')
  end
 
 end

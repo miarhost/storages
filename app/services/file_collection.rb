@@ -2,9 +2,10 @@ require "csv"
 require 'google/apis/drive_v2'
 
 class FileCollection
+  
+  Drive = Google::Apis::DriveV2
 
   def collect_in_folder(user, file_path)
-    Drive = Google::Apis::DriveV2
     client = Drive::DriveService.new(access_token)
     CSV.open(file_path, csv_options) do |csv|
       File.all.each do |file|

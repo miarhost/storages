@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   resources :folders do
   	resources :items
   end
-
+  
+  resources :items
+  
   root 'static_pages#home'
   get '/home', to: 'static_pages#home'
 end

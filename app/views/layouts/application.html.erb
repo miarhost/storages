@@ -24,7 +24,7 @@
        <!-- Navbar Up -->                                                                                                                      
   <nav class="topnavbar navbar-default topnav">
     <div role="navigation" class="navbar navbar-default topnav">
-     <div class="navbar-header">
+      <div class="navbar-header">
       <a href="<%= root_url %>" class="navbar-brand">
                 <img src="#" class="hidden-xs hidden-sm">
                 <img src="#" class="visible-xs visible-sm">
@@ -46,19 +46,23 @@
      </li>
    </ul>
  </div>
- 
 
+<ul class="nav navbar-nav" id="navbarontop">
   <li class="nav-item dropdown">
-   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">English<span class="caret"></span></a>
-     <ul class="dropdown-menu dropdowncostume">
-     <li><a href="<%= home_path(anchor: '#') %>">Russian</a></li>
-      <li><a href="<%= home_path(anchor: '#') %>">Ukrainian</a><br></li>
+   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">English <span class="caret"></span></a>
+     <ul class="dropdown-menu">
+     <li><a href="<%= home_path %>">Russian</a></li>
+      <li><a href="<%= home_path %>">Ukrainian</a></li>
     </ul>
   </li>
- 
-   <li><a href="#">My files</i></a></li>
-     <li><a href="#"><i class="fas fa-cloud-download-alt"></i></a></li>
-  
+
+   <li class="nav-item">
+    <a href="#">My files</i></a>
+   </li>
+     <li class="nav-item">
+      <a href="#"><i class="fas fa-cloud-download-alt"></i></a>
+    </li>
+</ul>
   <ul class="callme">
     <li>S.F. Uploader</li>
   </ul>
@@ -80,7 +84,7 @@
   </div> 
  </div>
 </div>
-</div>   
+</div>  
  </nav>
 </div>
  

@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>File:</strong>
+  <%= @item.attachment %>
+</p>
+
+<%= link_to 'Edit', edit_folder_item_path(@folder, @item) %> |
+<%= link_to 'Back', folder_path(@folder) %>
