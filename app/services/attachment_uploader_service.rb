@@ -1,13 +1,14 @@
 require 'google/apis/drive_v2'
+require 'omniauth-google-oauth2'
 
 class AttachmentUploaderService < ApplicationService
 
   Drive = Google::Apis::DriveV2
 
-  attr_reader :attachment 
+  attr_accessor :item, :attachment, :folder 
 
  def initialize(params)
- 	@attachment = params[:attachment]
+ 	@item = params[:item]
   @folder = params[:folder]
  end
 
@@ -21,10 +22,12 @@ class AttachmentUploaderService < ApplicationService
   def item_setup
     @item.folder_id = @folder.id
     @item.save
+    @attachment = @item.find(params[:attachment])
   end
 
  def drive_setup
   drive = Drive::DriveService.new
+  client = Drive::DriveService.new(access_token)
   drive.authorization =  OAuth2::Client.new('x', 'x', :site => 'https://accounts.google.com')
   oauth2_object = OAuth2::AccessToken.new(client, auth.token)
   google_contacts_user = GoogleContactsApi::User.new(oauth2_object)

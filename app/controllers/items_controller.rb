@@ -15,7 +15,7 @@ before_action :authenticate_user!
  end
 
  def create
-  @item = AttachmentUploaderService.call(params[:attachment])
+  @item = AttachmentUploaderService.call(params)
   if @item.save
   flash[:success] = "File added to your folder"
   else

@@ -13,7 +13,6 @@
   <% @items.each do |item| %>
    <tr>
    	<td><%= item.attachment %></td>
-    <td><%= item.attachment.updated_at  %></td>
     <td><%= item.attachment.size %></td>
     <td><%= link_to 'Show', item %></td>
     <td><%= link_to 'Edit', edit_item_path(item) %></td>
