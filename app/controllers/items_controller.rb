@@ -1,7 +1,10 @@
 class ItemsController < ApplicationController
 skip_before_action :verify_authenticity_token
 before_action :authenticate_user!
- 
+before_action :set_folder
+
+  after_action :store_file
+
  def index
  	@items = Item.all
  end
@@ -14,6 +17,10 @@ before_action :authenticate_user!
  	@item = Item.find(params[:id])
  end
 
+ def edit
+  @item = @folder.items.find(params[:id])
+ end
+ 
  def create
   @item = AttachmentUploaderService.call(params)
   if @item.save
@@ -23,9 +30,22 @@ before_action :authenticate_user!
   end
  end
 
+ def update
+ 	@item.update
+ 	respond_to do |format|
+ 		format.html { redirtect_to @item, flash: "File upload is changed" }
+ 		format.json { render :show, status: :ok, location: @item }
+ 	end
+ end
+
 private 
 
  def item_params
  	params.permit(:item).require(:attachment)
  end
+
+ def set_folder
+ 	@folder = Folder.find_by(params[:folder_id])
+ end
+ 
 end
