@@ -15,6 +15,7 @@ class AttachmentUploaderService < ApplicationService
  def call
    drive_setup
    item_setup
+   file_upload
  end
   
  private 
@@ -27,8 +28,15 @@ class AttachmentUploaderService < ApplicationService
 
  def drive_setup
   drive = Drive::DriveService.new
-  
+  drive = Drive::DriveService.new
+  client = Drive::DriveService.new(access_token)
+  drive.authorization =  OAuth2::Client.new('x', 'x', :site => 'https://accounts.google.com')
+  oauth2_object = OAuth2::AccessToken.new(client, auth.token)
+  google_contacts_user = GoogleContactsApi::User.new(oauth2_object)
+ end
   # Upload a file
+ def file_upload 
+  drive = Drive::DriveService.new
   metadata = Drive::File.new(title: 'My document')
   
   file_metadata = {
