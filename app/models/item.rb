@@ -1,9 +1,8 @@
-
-
 class Item < ApplicationRecord
  
  belongs_to :folder
  
+ has_one_attached :attachment
 
  def item_params
   require_params = params.require(:item).permit(:attachment)

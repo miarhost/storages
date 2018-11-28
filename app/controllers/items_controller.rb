@@ -23,6 +23,7 @@ before_action :set_folder
  
  def create
   @item = AttachmentUploaderService.call(params)
+  @item.attachment.attach(params[:attachment])
   if @item.save
   flash[:success] = "File added to your folder"
   else

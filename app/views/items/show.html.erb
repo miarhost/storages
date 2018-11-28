@@ -2,7 +2,7 @@
 
 <p>
   <strong>File:</strong>
-  <%= @item.attachment %>
+  <%= url_for(@item.attachment) if @item.attachment.attached? %>
 </p>
 
 <%= link_to 'Edit', edit_folder_item_path(@folder, @item) %> |
