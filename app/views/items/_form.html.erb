@@ -1,10 +1,12 @@
 <%= form_with(model: [ @folder, @item ], local: true) do |form| %>
-
+  
   <div class="field">
-    <%= form.label :your_file %>
-    <%= form.file_field :attachment, id: :item_attachment %>
-
+  
+    <%= label_tag :your_file %>
+    <%= file_field_tag :attachment, id: :item_attachment %>
+   
   <div class="actions">
-    <%= form.submit %>
+    <%= submit_tag "Upload" %>
   </div>
+
 <% end %>

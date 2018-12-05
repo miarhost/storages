@@ -12,7 +12,7 @@ class AttachmentUploaderService < ApplicationService
  end
 
  def call
-   drive_setup
+   drive_setup if Rails.env.production?
    item_setup
    file_upload
  end
