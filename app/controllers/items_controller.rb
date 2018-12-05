@@ -3,8 +3,6 @@ skip_before_action :verify_authenticity_token
 before_action :authenticate_user!
 before_action :set_folder
 
-  after_action :store_file
-
  def index
  	@items = Item.all
  end
@@ -22,8 +20,7 @@ before_action :set_folder
  end
  
  def create
-  @item = AttachmentUploaderService.call(params)
-  @item.attachment.attach(params[:attachment])
+  @item = AttachmentUploaderService.call(params[:attachment])
   if @item.save
   flash[:success] = "File added to your folder"
   else

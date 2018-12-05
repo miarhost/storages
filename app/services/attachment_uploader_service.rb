@@ -5,11 +5,10 @@ class AttachmentUploaderService < ApplicationService
 
   Drive = Google::Apis::DriveV2
  
-  attr_accessor :item, :attachment, :folder, :uploaded_file
+  attr_reader :item, :attachment, :folder, :uploaded_file
 
- def initialize(params)
- 	@item = params[:item]
-  @folder = params[:folder]
+ def initialize(attachment)
+ 	@attachment = attachment
  end
 
  def call
