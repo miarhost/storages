@@ -6,8 +6,6 @@ class UsersController < ApplicationController
 
  def show
   @user = User.find(params[:id])
-  #Later move to another specific action: 
- redirect_to users_url(@users), :status => 418, :alert => "No such user"
  end
 
 end

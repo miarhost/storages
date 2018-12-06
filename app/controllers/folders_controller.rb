@@ -15,6 +15,11 @@ class FoldersController < ApplicationController
 
   end
 
+  def show
+   @folder = Folder.find(params[:id])
+   @items = Item.all
+  end
+
   def create 
   	@folder = current_user.folders.build(folder_params)
   	respond_to do |format|

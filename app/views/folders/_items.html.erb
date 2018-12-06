@@ -4,6 +4,7 @@
  <thead style="background-color: none; font-family: 'Mark Pro'; font-size: 11px">
   <tr class="text gray">
    <th>File</th>
+   <th>URL</th>
    <th data-sortable="true">Uploaded at</th>
    <th>Size</th>
   </tr>
@@ -12,8 +13,10 @@
  <tbody>
   <% @folder.items.each do |item| %>
    <tr>
-   	<td><%= item.attachment.filename %></td>
-    <td><%= truncate(strip_tags (url_for(item.attachment)), length:100) %></td>
+   	<td><%= item.attachment.filename if item.attachment.attached? %></td>
+    <td><%= truncate(url_for(item.attachment), length:54) if item.attachment.attached? %></td>
+    <td><%= item.attachment.created_at if item.attachment.attached? %></td>
+    <td><%= sprintf('%.2f',item.attachment.byte_size/10000.to_f)  if item.attachment.attached? %>Mb</td>
     <td><%= link_to 'Show', item %></td>
     <td><%= link_to 'Edit', edit_item_path(item) %></td>
     <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -21,7 +24,5 @@
   <% end %>
  </tbody>
 </table>
-
-<%= link_to 'New Item', new_folder_item_path %>
 
 

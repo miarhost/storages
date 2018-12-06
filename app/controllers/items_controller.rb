@@ -20,11 +20,13 @@ before_action :set_folder
  end
  
  def create
+ 	#@folder = Folder.find_by(params[:folder_id])
   @item = @folder.items.build(item_params)
-  AttachmentUploaderService.call(params[:attachment])
-  @item.attachments.attach(params[:attachment]) 
+  #AttachmentUploaderService.call(params[:attachment])
+  #@item.attachment.attach(io: io, filename: "sample.jpg")
   if @item.save
   flash[:success] = "File added to your folder"
+  redirect_to @item
   else
   redirect_to folder_path(@folder)
   end
@@ -41,11 +43,11 @@ before_action :set_folder
 private 
 
  def item_params
- 	params.permit(:item).require(:attachment)
+ 	params.require(:item).permit(:attachment, :folder_id, :id)
  end
 
- def set_folder
- 	@folder = Folder.find_by(params[:folder_id])
- end
+def set_folder
+ @folder = Folder.find_by(params[:folder_id])
+end
  
 end
