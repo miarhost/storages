@@ -20,10 +20,8 @@ before_action :set_folder
  end
  
  def create
- 	#@folder = Folder.find_by(params[:folder_id])
   @item = @folder.items.build(item_params)
   #AttachmentUploaderService.call(params[:attachment])
-  #@item.attachment.attach(io: io, filename: "sample.jpg")
   if @item.save
   flash[:success] = "File added to your folder"
   redirect_to @item
