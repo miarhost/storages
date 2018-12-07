@@ -11,3 +11,7 @@
 	<strong>Preview: </strong><br>
   <%= image_tag @item.attachment if @item.attachment.attached? %>
 </p>
+
+   
+   <p><%= link_to 'Delete this file', folder_item_path(@folder, @item), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+   <p><%= link_to 'Back to Folder', folder_path(@folder) %></p>

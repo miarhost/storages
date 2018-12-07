@@ -15,10 +15,7 @@ before_action :set_folder
  	@item = Item.find(params[:id])
  end
 
- def edit
-  @item = @folder.items.find(params[:id])
- end
- 
+
  def create
   @item = @folder.items.build(item_params)
   #AttachmentUploaderService.call(params[:attachment])
@@ -30,12 +27,13 @@ before_action :set_folder
   end
  end
 
- def update
- 	@item.update
+ def destroy
+ 	@item = Item.find(params[:id])
+ 	@item.destroy
  	respond_to do |format|
- 		format.html { redirtect_to @item, flash: "File upload is changed" }
- 		format.json { render :show, status: :ok, location: @item }
- 	end
+ 		format.html { redirect_to folder_path(@folder), notice: 'File is deleted!' }
+   format.json { head :no_content }
+  end
  end
 
 private 

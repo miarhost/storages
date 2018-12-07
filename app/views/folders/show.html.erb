@@ -2,7 +2,13 @@
 <div class="text-gray"><%= @folder.description %></div>
 <div>Files: <%= @folder.filenum %></div>
 
+<p style="font-family: 'Mark' ">
 <%= link_to 'Back to Folders', folders_path %> | 
 <%= link_to 'Delete folder', @folder, method: :delete, data: { confirm: 'Are you sure?' } %>
+</p>
 
-<%= render partial: 'items' %>
+<%= render partial: 'items' %><br>
+
+<p style="font-family: 'Mark' ">
+<%= link_to 'Upload File', new_folder_item_path(@folder, @item) %>
+</p>
