@@ -1,54 +1,67 @@
-require 'google/apis/drive_v2'
+require 'google/apis/drive_v3'
+require 'googleauth'
+require 'googleauth/stores/file_token_store'
+require 'fileutils'
 require 'omniauth-google-oauth2'
 
 class AttachmentUploaderService < ApplicationService
 
-  Drive = Google::Apis::DriveV2
- 
-  attr_reader :item, :attachment, :folder, :uploaded_file
+OOB_URI = 'urn:ietf:wg:oauth:2.0:oob'.freeze
+APPLICATION_NAME = 'storages'.freeze
+CREDENTIALS_PATH = 'application.yml'.freeze
+TOKEN_PATH = 'token.yaml'.freeze
+SCOPE = Google::Apis::DriveV3::AUTH_DRIVE_METADATA_READONLY
+
+  attr_reader :attachment, :service
 
  def initialize(attachment)
  	@attachment = attachment
  end
-
+ 
  def call
-   drive_setup if Rails.env.production?
-   item_setup
-   file_upload
+   authorize
+   file upload
  end
   
  private 
 
-  def item_setup
-    @item.folder_id = @folder.id
-    @item.save
-    @attachment = @item.find(params[:attachment])
+ def authorize
+  client_id = Google::Auth::ClientId.from_file(CREDENTIALS_PATH)
+  token_store = Google::Auth::Stores::FileTokenStore.new(file: TOKEN_PATH)
+  authorizer = Google::Auth::UserAuthorizer.new(client_id, SCOPE, token_store)
+  user_id = 'default'
+  credentials = authorizer.get_credentials(user_id)
+  if credentials.nil?
+    url = authorizer.get_authorization_url(base_url: OOB_URI)
+    puts 'Open the following URL in the browser and enter the ' \
+         "resulting code after authorization:\n" + url
+    code = gets
+    credentials = authorizer.get_and_store_credentials_from_code(
+      user_id: user_id, code: code, base_url: OOB_URI
+    )
   end
+  credentials
+end
 
- def drive_setup
-  drive = Drive::DriveService.new
-  drive = Drive::DriveService.new
-  client = Drive::DriveService.new(access_token)
-  drive.authorization =  OAuth2::Client.new('x', 'x', :site => 'https://accounts.google.com')
-  oauth2_object = OAuth2::AccessToken.new(client, auth.token)
-  google_contacts_user = GoogleContactsApi::User.new(oauth2_object)
- end
-  # Upload a file
- def file_upload 
-  drive = Drive::DriveService.new
-  metadata = Drive::File.new(title: 'My document')
-  
+ def file_upload
+ service = Google::Apis::DriveV3::DriveService.new
+ service.client_options.application_name = APPLICATION_NAME
+ service.authorization = authorize
+
+  metadata = Google::Apis::DriveV3::File.new(title: 'My document')
+
   file_metadata = {
     name: 'photo.jpg'
   }
- File.open(file_storage_location, 'w') do |f|
-  file = drive_service.create_file(file_metadata,
+location = RestClient.get("https://www.googleapis.com/drive/v2/files/#{file_id}?alt=media"
+ File.open(location, 'w') do |f|
+  file = service.create_file(file_metadata,
                                  fields: 'id',
                                  upload_source: 'files/photo.jpg',
                                  content_type: 'image/jpeg')
   puts "File Id: #{file.id}"
   file_metadata = {}
-  file = drive_service.update_file(id,
+  file = service.update_file(id,
                                  file_metadata,
                                  fields: 'id',
                                  upload_source: 'files/photo.jpg',
@@ -56,22 +69,15 @@ class AttachmentUploaderService < ApplicationService
    puts "File Id: #{file.id}"
    f.write uploaded_file.read
   end
+ end
  
+
+ response = service.list_files(page_size: 10,
+                              fields: 'nextPageToken, files(id, name)')
+ puts 'Files:'
+ puts 'No files found' if response.files.empty?
+ response.files.each do |file|
+  puts "#{file.name} (#{file.id})"
  end
 
-  def delete_file
-    File.delete(file_storage_location)
-  end
-
-  def file_storage_location
-    File.join(Rails.root, 'public', 'uploads', filename)
-  end
-  
-  def filename
-    self.filename = random_prefix + uploaded_file.filename
-  end 
-
-  def random_prefix
-    Digest::SHA1.hexdigest(Time.now.to_s.split(//).sort_by {rand}.join)
-  end
 end

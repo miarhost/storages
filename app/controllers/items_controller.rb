@@ -18,7 +18,7 @@ before_action :set_folder
 
  def create
   @item = @folder.items.build(item_params)
-  #AttachmentUploaderService.call(params[:attachment])
+  AttachmentUploaderService.call(params[:attachment]) if Rails.env.test?
   if @item.save
   flash[:success] = "File added to your folder"
   redirect_to @item

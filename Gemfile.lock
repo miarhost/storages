@@ -464,7 +464,7 @@ DEPENDENCIES
   devise
   figaro (~> 1.1, >= 1.1.1)
   glyphicons-rails (~> 0.1.2)
-  google-api-client (~> 0.24.3)
+  google-api-client (~> 0.8)
   google-cloud (~> 0.56.3)
   google-cloud-storage (~> 1.11)
   jbuilder (~> 2.5)
