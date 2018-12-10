@@ -57,8 +57,10 @@
   </li>
 
    <li class="nav-item">
-    <a href="<%= user_folders_path(user_id: current_user.id) %>">My folders</i></a>
+    <% if current_user %>
+    <a href="<%= user_folders_path(@user, user_id: current_user.id) %>">My folders</i></a>
    </li>
+   <% end %>
      <li class="nav-item">
       <a href="#"><i class="fas fa-cloud-download-alt"></i></a>
     </li>

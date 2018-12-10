@@ -23,7 +23,8 @@ before_action :set_folder
   flash[:success] = "File added to your folder"
   redirect_to user_folder_path(current_user, @folder)
   else
-  redirect_to folder_path(@folder)
+  flash[:notice] = "File can't be saved"
+  redirect_to user_folders_path(current_user, @folders)
   end
  end
 

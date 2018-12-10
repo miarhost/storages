@@ -1,6 +1,6 @@
 <h1>Folder: <%= @folder.title %></h1>
 <div class="text-gray"><%= @folder.description %></div>
-<div>Files: <%= @folder.filenum %></div>
+<div>Files: <%= @folder.items.count %></div>
 
 <p style="font-family: 'Mark' ">
 <%= link_to 'Back to Folders', folders_path %> | 
