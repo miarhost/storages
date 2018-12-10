@@ -21,7 +21,7 @@ before_action :set_folder
   AttachmentUploaderService.call(params[:attachment]) if Rails.env.test?
   if @item.save
   flash[:success] = "File added to your folder"
-  redirect_to @item
+  redirect_to user_folder_path(current_user, @folder)
   else
   redirect_to folder_path(@folder)
   end

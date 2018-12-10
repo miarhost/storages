@@ -17,7 +17,7 @@ class FoldersController < ApplicationController
 
   def show
    @folder = Folder.find(params[:id])
-   @items = Item.all
+   @items = @folder.items
   end
 
   def create 
