@@ -31,3 +31,4 @@
 /config/master.key
 # Ignore Google Drive secret
 /config/application.yml
+/config/credentials.json

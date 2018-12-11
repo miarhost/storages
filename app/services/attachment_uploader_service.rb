@@ -8,7 +8,7 @@ class AttachmentUploaderService < ApplicationService
 
 OOB_URI = 'urn:ietf:wg:oauth:2.0:oob'.freeze
 APPLICATION_NAME = 'storages'.freeze
-CREDENTIALS_PATH = 'application.yml'.freeze
+CREDENTIALS_PATH = 'config/credentials.json'
 TOKEN_PATH = 'token.yaml'.freeze
 SCOPE = Google::Apis::DriveV3::AUTH_DRIVE_METADATA_READONLY
 
@@ -20,7 +20,7 @@ SCOPE = Google::Apis::DriveV3::AUTH_DRIVE_METADATA_READONLY
  
  def call
    authorize
-   file upload
+   file_upload
  end
   
  private 
@@ -53,8 +53,8 @@ end
   file_metadata = {
     name: 'photo.jpg'
   }
-location = RestClient.get("https://www.googleapis.com/drive/v2/files/#{file_id}?alt=media"
- File.open(location, 'w') do |f|
+location = RestClient.post("https://www.googleapis.com/upload/drive/v3/files/#{file_id}?alt=media")
+ metadata.open(location, 'w') do |f|
   file = service.create_file(file_metadata,
                                  fields: 'id',
                                  upload_source: 'files/photo.jpg',
@@ -69,8 +69,7 @@ location = RestClient.get("https://www.googleapis.com/drive/v2/files/#{file_id}?
    puts "File Id: #{file.id}"
    f.write uploaded_file.read
   end
- end
- 
+
 
  response = service.list_files(page_size: 10,
                               fields: 'nextPageToken, files(id, name)')
@@ -79,5 +78,5 @@ location = RestClient.get("https://www.googleapis.com/drive/v2/files/#{file_id}?
  response.files.each do |file|
   puts "#{file.name} (#{file.id})"
  end
-
+end
 end
