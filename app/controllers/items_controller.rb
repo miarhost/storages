@@ -18,13 +18,14 @@ before_action :set_folder
 
  def create
   @item = @folder.items.build(item_params)
+  @item.folder.user_id = current_user.id
   AttachmentUploaderService.call(params[:attachment]) if Rails.env.test?
   if @item.save
   flash[:success] = "File added to your folder"
-  redirect_to user_folder_path(current_user, @folder)
+  redirect_to folder_path(@folder)
   else
   flash[:notice] = "File can't be saved"
-  redirect_to user_folders_path(current_user, @folders)
+  redirect_to folders_path(@folders)
   end
  end
 
@@ -44,7 +45,7 @@ private
  end
 
 def set_folder
- @folder = Folder.find_by(params[:folder_id])
+ @folder = Folder.find(params[:folder_id])
 end
  
 end

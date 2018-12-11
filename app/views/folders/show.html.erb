@@ -10,5 +10,5 @@
 <%= render partial: 'items' %><br>
 
 <p style="font-family: 'Mark' ">
-<%= link_to 'Upload File', new_folder_item_path(@folder, @item) %>
+<%= link_to 'Upload File', new_folder_item_path(@folder, @item, folder_id: @folder.id) %>
 </p>
