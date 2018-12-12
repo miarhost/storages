@@ -3,6 +3,8 @@ require 'googleauth'
 require 'googleauth/stores/file_token_store'
 require 'fileutils'
 require 'omniauth-google-oauth2'
+require 'google/api_client/client_secrets'
+
 
 class AttachmentUploaderService < ApplicationService
 
@@ -47,7 +49,9 @@ end
  service = Google::Apis::DriveV3::DriveService.new
  service.client_options.application_name = APPLICATION_NAME
  service.authorization = authorize
-
+ if service.authorization.nil?
+    client_secrets = Google::APIClient::ClientSecrets.load
+ end
   metadata = Google::Apis::DriveV3::File.new(title: 'My document')
 
   file_metadata = {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_28_102956) do
+ActiveRecord::Schema.define(version: 201811011425612) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -35,7 +35,6 @@ ActiveRecord::Schema.define(version: 2018_11_28_102956) do
 
   create_table "folders", force: :cascade do |t|
     t.string "title"
-    t.integer "filenum"
     t.text "description"
     t.integer "user_id"
     t.datetime "created_at", null: false
