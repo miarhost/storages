@@ -17,8 +17,8 @@ local:
 # Remember not to checkin your GCS keyfile to a repository
 google:
   service: GCS
-  project: "storages"
-  credentials: <%= Rails.root.join("config/initizlizers/omniauth.rb") %>
+  project: "storages-1544611837892"
+  credentials: <%= Rails.root.join("config/initializers/application.yml") %>
   bucket: ""
 
 # Use rails credentials:edit to set the Azure Storage secret (as azure_storage:storage_access_key)

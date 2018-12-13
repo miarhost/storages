@@ -19,7 +19,6 @@ before_action :set_folder
  def create
   @item = @folder.items.build(item_params)
   @item.folder.user_id = current_user.id
-  AttachmentUploaderService.call(params[:attachment]) #if Rails.env.test?
   if @item.save
   flash[:success] = "File added to your folder"
   redirect_to folder_path(@folder)
@@ -37,6 +36,10 @@ before_action :set_folder
    format.json { head :no_content }
   end
  end
+
+ def upload_to_gc
+  GcAttachmentUploaderService.call(params[:attachment])
+ end  
 
 private 
 

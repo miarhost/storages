@@ -4,6 +4,7 @@ require 'googleauth/stores/file_token_store'
 require 'fileutils'
 require 'omniauth-google-oauth2'
 require 'google/api_client/client_secrets'
+require 'json'
 
 
 class AttachmentUploaderService < ApplicationService
