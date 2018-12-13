@@ -26,30 +26,24 @@
     <div role="navigation" class="navbar navbar-default topnav">
       <div class="navbar-header">
       <a href="<%= root_url %>" class="navbar-brand">
-                <img src="#" class="hidden-xs hidden-sm">
-                <img src="#" class="visible-xs visible-sm">
+                <img src="<%= asset_path 'fish.jpg' %>" class="visible-xs visible-sm">
                 <span class="sr-only">Home</span>
       </a>
-  <button type="button" class="navbar-toggle collapsed toggle-costume" data-toggle="collapse" data-target="#upmenu" class="navbar-toggle navbar-btn"><i class="fas fa-align-justify"></i></button>
    </div>
    
       <div class="collapse navbar-collapse" id="upmenu">
        <ul class="nav navbar-nav">
-        <li class="nav-item dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">4 <span class="caret"></span></a>
-        <li class="nav-item">
-            <a href="<%= home_path(anchor: '#') %>">5</a>
-       </li>
-        <li class="nav-item">
-          <a href="<%= home_path(anchor: '#') %>">6</a><br>
-        </li>
-     </li>
-   </ul>
+
  </div>
 
 <ul class="nav navbar-nav" id="navbarontop">
   <li class="nav-item dropdown">
+      <div aria-labelledby="homeDropdown" class="dropdown-menu"><a href="#" class="dropdown-item"></a><div class="image"><a href="#" data-toggle="modal" data-target="#modal" alt="" class="img-fluid image1"></a></div> 
+    </div>
+  </li>
+  <li class="nav-tem dropdown">
    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">English <span class="caret"></span></a>
+ </li>
      <ul class="dropdown-menu">
      <li><a href="<%= home_path %>">Russian</a></li>
       <li><a href="<%= home_path %>">Ukrainian</a></li>
@@ -61,8 +55,9 @@
     <a href="<%= user_folders_path(@user, user_id: current_user.id) %>">My folders</i></a>
    </li>
    <% end %>
-     <li class="nav-item">
-      <a href="#"><i class="fas fa-cloud-download-alt"></i></a>
+     <li class="nav-item dropdown">
+          
+     </li><a href="#" data-toggle="modal" data-target="#modal" class="dropdown-item"><i class="fas fa-cloud-download-alt"></i></a>
     </li>
 </ul>
   <ul class="callme">
@@ -89,6 +84,33 @@
 </div>  
  </nav>
 </div>
+    
+          <div id="modal" tabindex="-1" 
+           role="dialog" aria-hidden="false" class="modal fade">
+           
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+                  <div class="row quick-view product-main">
+                    <div class="col-sm-6">
+                      <div class="modalhome-main-image"><img src="#" alt="" class="img-fluid"></div>
+                                   
+                    </div>
+                    <div class="col-sm-6">
+                      <h2><%= t('layouts.application.modal_greeting') %></h2>
+                      <p class="text-muted text-small text-center"><%= t('main.contacts.about_p') %></p>
+                  
+                          <p class="text-center"><a href="№" class="btn btn-outline-primary"><%= t('layouts.application.contacts') %></a></p>
+                        </form>
+                      </div>
+                      <!-- /.box-->
+                 
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
  
 </header>
 
