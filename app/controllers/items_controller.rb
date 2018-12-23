@@ -44,7 +44,7 @@ before_action :set_folder
 private 
 
  def item_params
- 	params.permit(:attachment, :folder_id, :id)
+ 	params.require(:item).permit(:attachment, :folder_id, :id)
  end
 
 def set_folder
