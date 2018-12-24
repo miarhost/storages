@@ -32,4 +32,3 @@
 # Ignore Google Drive secret
 /config/application.yml
 /config/credentials.json
-/config/gce.json
