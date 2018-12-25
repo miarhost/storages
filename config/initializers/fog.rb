@@ -1,3 +1,4 @@
+Fog.setup do |config|
 config.fog_credentials = {
     provider:              'AWS',                        # required
     aws_access_key_id:     ENV["ACCESS_KEY_ID"],                       # required
@@ -6,5 +7,5 @@ config.fog_credentials = {
     host:                  'https://s3.eu-west-2.amazonaws.com',             # optional, defaults to nil
     endpoint:              'https://s3.eu-west-2.amazonaws.com' # optional, defaults to nil
   }
+ end
 
-  
