@@ -21,11 +21,11 @@ gem 'glyphicons-rails', '~> 0.1.2'
 gem 'mini_magick'
 gem 'oauth2', '~> 1.2'
 gem 'omniauth-google-oauth2', '~> 0.5.3'
-gem 'google-cloud', '~> 0.56.3'
-gem "google-cloud-storage", "~> 1.11", require: false
 gem 'google-api-client', '~> 0.8'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'multipart-post'
+gem 'aws-sdk-s3', '~> 1.9', '>= 1.9.1'
+gem 'fog-aws', '~> 2.0'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
