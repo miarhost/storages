@@ -7,6 +7,7 @@
    <th>URL</th>
    <th data-sortable="true">Uploaded at</th>
    <th>Size</th>
+   <th>Options</th>
   </tr>
  </thead>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
@@ -18,6 +19,7 @@
     <td><%= item.attachment.created_at if item.attachment.attached? %></td>
     <td><%= sprintf('%.2f',item.attachment.byte_size/10000.to_f)  if item.attachment.attached? %>Mb</td>
     <td><%= link_to 'Preview', folder_item_path(@folder, item) %></td>
+        <td><%= link_to 'Download',  rails_blob_path(item.attachment, disposition: "attachment"), controller: 'items',action: 'download', method: 'get', notice: "Get your file" %></td>
    </tr>   
   <% end %>
  </tbody>

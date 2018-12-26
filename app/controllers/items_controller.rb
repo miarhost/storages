@@ -39,7 +39,11 @@ before_action :set_folder
 
  def upload_to_gc
   GcAttachmentUploaderService.call(params[:attachment])
- end  
+ end 
+
+ def download 
+  @item.attachment.download
+ end 
 
 private 
 
