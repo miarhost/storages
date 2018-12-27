@@ -5,6 +5,7 @@ before_action :set_folder
 
  def index
  	@items = Item.all
+ update_total_views
  end
  
  def new
@@ -13,8 +14,9 @@ before_action :set_folder
 
  def show
  	@item = Item.find(params[:id])
+  increment = @item.views +=1 
+  @item.update_attribute "views", increment
  end
-
 
  def create
   @item = @folder.items.build(item_params)
@@ -32,7 +34,7 @@ before_action :set_folder
  	@item = Item.find(params[:id])
  	@item.destroy
  	respond_to do |format|
- 		format.html { redirect_to folder_path(@folder), notice: 'File is deleted!' }
+ 	 format.html { redirect_to folder_path(@folder), notice: 'File is deleted!' }
    format.json { head :no_content }
   end
  end
@@ -48,7 +50,7 @@ before_action :set_folder
 private 
 
  def item_params
- 	params.require(:item).permit(:attachment, :folder_id, :id)
+ 	params.require(:item).permit(:attachment, :folder_id, :id, :views)
  end
 
 def set_folder

@@ -4,7 +4,7 @@
  <thead style="background-color: none; font-family: 'Mark Pro'; font-size: 11px">
   <tr class="text gray">
    <th>File</th>
-   <th>URL</th>
+   <th>Views</th>
    <th data-sortable="true">Uploaded at</th>
    <th>Size</th>
    <th>Options</th>
@@ -15,11 +15,11 @@
   <% @folder.items.each do |item| %>
    <tr>
    	<td><%= item.attachment.filename if item.attachment.attached? %></td>
-    <td><%= truncate(url_for(item.attachment), length:54) if item.attachment.attached? %></td>
+    <td><%= item.views %></td>
     <td><%= item.attachment.created_at if item.attachment.attached? %></td>
     <td><%= sprintf('%.2f',item.attachment.byte_size/10000.to_f)  if item.attachment.attached? %>Mb</td>
-    <td><%= link_to 'Preview', folder_item_path(@folder, item) %></td>
-        <td><%= link_to 'Download',  rails_blob_path(item.attachment, disposition: "attachment"), controller: 'items',action: 'download', method: 'get', notice: "Get your file" %></td>
+    <td><%= link_to 'Overview', folder_item_path(@folder, item) %></td>
+    <td><%= link_to 'Download',  rails_blob_path(item.attachment, disposition: "attachment"), controller: 'items',action: 'download', method: 'get', notice: "Get your file" if item.attachment.attached? %></td>
    </tr>   
   <% end %>
  </tbody>
