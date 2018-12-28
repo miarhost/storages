@@ -3,8 +3,8 @@
 <p id="notice"><%= @item.attachment.filename if @item.attachment.attached? %></p>
 
 <p>
-  <strong>URL:</strong>
-  <%= url_for(@item.attachment) if @item.attachment.attached? %>
+  <strong>Views:</strong>
+  <%= @item.views if @item.attachment.attached? %>
 </p>
 
 <p>
@@ -15,3 +15,4 @@
    
    <p><%= link_to 'Delete this file', folder_item_path(@folder, @item), method: :delete, data: { confirm: 'Are you sure?' } %></p>
    <p><%= link_to 'Back to Folder', folder_path(@folder) %></p>
+
