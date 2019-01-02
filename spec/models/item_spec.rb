@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   
   before(:each) do
-   	subject { Item.new{attachment: "content.jpg", views: 0}}
+   	subject { Item.new{attachment: "content.jpg", views: 0} }
   end
 
   describe "ActiveRecord relations" do

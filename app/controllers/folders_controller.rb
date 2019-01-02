@@ -54,7 +54,7 @@ class FoldersController < ApplicationController
   private
 
   def folder_params
-  	params.require(:folder).permit(:title, :filenum, :description)
+  	params.require(:folder).permit(:title, :description, :user_id)
   end
 
   def set_folder 
