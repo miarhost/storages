@@ -1,0 +1,19 @@
+<h3>USERS</h3>
+<%= will_paginate @users %>
+	<div class="grid">
+		<div class="row">
+<% @users.each do |user| %> 
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+				 <div>
+							<%= user.name %>
+					</div>
+					<div>
+							<%= user.email %> 							
+	 			</div>
+	 			<div>
+		 				<%= link_to 'Folders',user_folders_path(user) %><br>
+		 		</div>
+	 	</div>
+	<% end %>
+ </div>
+</div>	 
