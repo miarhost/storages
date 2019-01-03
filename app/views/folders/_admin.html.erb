@@ -3,7 +3,8 @@
     <h1>Folders</h1>
    </div>
    <div class="col-sm-4">
-  <p class="text-gray">Welcome, <%= current_user.email.split('@').first %></p>
+  <p class="text-gray">Folders</p>
+  <p class="text-gray">User: <%= @user.email.split('@').first %></p>
   </div>
 <table data-toggle="table" width = "100%" border="0" cellspacing="0" cellpadding="0">
  <thead style="background-color: none; font-family: 'Mark Pro'; font-size: 11px">
@@ -20,11 +21,7 @@
    	<td><%= folder.title %></td>
     <td><%= folder.description %></td>
     <td><%= folder.items.count %></td>
-    <td><%= link_to 'Open folder', user_folder_path(folder, user_id: current_user.id) %></td>
-    <td><%= link_to 'Delete folder', folder, method: :delete, data: { confirm: 'You are going to delete folder with files! Are you sure?' } %></td>
    </tr>   
   <% end %>
  </tbody>
 </table>
-
-<%= link_to 'New Folder', new_folder_path %>

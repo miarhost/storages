@@ -1,6 +1,6 @@
 class FoldersController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :authenticate_user!
+  before_action :authenticate_user! unless :admin_session
   before_action :set_folder, only: [:show, :edit, :update, :destroy]
 
   def new
@@ -8,7 +8,12 @@ class FoldersController < ApplicationController
   end
   
   def index
-  	@folders = Folder.where(user_id: current_user.id)
+    @user = User.find_by(params[:user_id])
+      if admin_session
+      @folders = Folder.where(user_id: @user.id)
+      else
+  	  @folders = Folder.where(user_id: current_user.id)
+      end
   end
 
   def edit; end
