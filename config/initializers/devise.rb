@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+CALLBACK_URL = 'http://localhost:3000/users/auth/google_oauth2/callback'
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -31,7 +31,7 @@ Devise.setup do |config|
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
   require 'devise/orm/active_record'
-
+  
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
   # just :email. You can configure it to use [:username, :subdomain], so for
@@ -256,8 +256,18 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-   config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'], {
-    scope: "contacts.readonly,userinfo.email" }
+  require "omniauth-google-oauth2"
+   config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'],
+    {
+    :scope => 'email',
+    :provider_ignores_state => true,
+    :prompt => "select_account",
+    :redirect_uri => CALLBACK_URL,
+    setup: (lambda do |env|
+      request = Rack::Request.new(env)
+      env['omniauth.strategy'].options['token_params'] = {:redirect_uri => CALLBACK_URL}
+    end)
+    }
  
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
