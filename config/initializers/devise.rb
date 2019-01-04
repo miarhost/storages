@@ -259,6 +259,7 @@ Devise.setup do |config|
   require "omniauth-google-oauth2"
    config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'],
     {
+    :full_host => Rails.env.production? ? 'http://storages.herokuapp.com' : 'http://localhost:3000',
     :scope => 'email',
     :provider_ignores_state => true,
     :prompt => "select_account",
