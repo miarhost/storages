@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
   def create
     @item = @folder.items.build(item_params)
     @item.folder.user_id = current_user.id
-    if @item.save
+      if @item.save
       flash[:success] = "File added to your folder"
       redirect_to folder_path(@folder)
     else

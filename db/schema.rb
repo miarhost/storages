@@ -63,6 +63,13 @@ ActiveRecord::Schema.define(version: 201811011425612) do
     t.index ["folder_id"], name: "index_items_on_folder_id"
   end
 
+  create_table "sample_uploads", force: :cascade do |t|
+    t.string "attachment"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email", default: "", null: false
