@@ -57,7 +57,12 @@
    <% end %>
      <li class="nav-item dropdown">
           
-     </li><a href="#"><i class="fas fa-cloud-download-alt"></i></a>
+     </li>
+      <%= form_for(@sample_upload, path: '/sample_uploads', method: :post) do |f| %>
+      <div class="form-group">
+        <button class="fas fa-cloud-download-alt" type="file" ></button>
+      </div>
+      <% end %>
     </li>
 </ul>
   <ul class="callme">

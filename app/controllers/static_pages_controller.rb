@@ -1,5 +1,7 @@
 class StaticPagesController < ApplicationController
  
- def home; end 
+ def home
+ 	@sample_upload = SampleUpload.new
+ end 
    
 end
