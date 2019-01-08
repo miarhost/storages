@@ -58,10 +58,16 @@
      <li class="nav-item dropdown">
           
      </li>
-      <%= form_for(@sample_upload, path: '/sample_uploads', method: :post) do |f| %>
-      <div class="form-group">
-        <button class="fas fa-cloud-download-alt" type="file" ></button>
+     <%= form_for(@sample_upload, path: '/sample_uploads', method: :post, multipart: true) do |form| %>
+     <div class="form-group">
+      <div class="field">  
+      <%= label_tag :attachment %>
+      <%= form.file_field :attachment %>
       </div>
+      <div class="action">
+         <i class="fas fa-cloud-download-alt"><%= form.submit%></i>
+      </div>
+    </div>
       <% end %>
     </li>
 </ul>
