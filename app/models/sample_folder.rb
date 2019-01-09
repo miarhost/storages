@@ -1,0 +1,2 @@
+class SampleFolder < ApplicationRecord
+end

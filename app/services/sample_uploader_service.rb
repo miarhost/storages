@@ -24,7 +24,7 @@ class SampleUploaderService < ApplicationService
 
   def upload
     uri = URI.parse("#{HOST}/sample_uploads") 
-    file = File.open("tmp/text.txt", "r")
+    file = File.open("public/text.txt", "r")
     filename = "#{File.basename(file)}"
     mime_type = MIME::Types.type_for(filename)[0] || MIME::Types["application/octet-stream"][0]
 
