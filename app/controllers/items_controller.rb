@@ -21,12 +21,12 @@ class ItemsController < ApplicationController
     @item = @folder.items.build(item_params)
     @item.folder.user_id = current_user.id
       if @item.save
-      flash[:success] = "File added to your folder"
-      redirect_to folder_path(@folder)
-    else
-      flash[:notice] = "File can't be saved"
-      redirect_to folders_path(@folders)
-    end
+        flash[:success] = "File added to your folder"
+        redirect_to folder_path(@folder)
+      else
+        flash[:notice] = "File can't be saved"
+        redirect_to folders_path(@folders)
+      end
   end
 
   def destroy

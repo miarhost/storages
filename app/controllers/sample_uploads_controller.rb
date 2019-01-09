@@ -2,7 +2,10 @@ class SampleUploadsController < ApplicationController
   
   skip_before_action :verify_authenticity_token
   before_action :set_sample_upload, only: [:show]
-  rescue_from ActionController::BadRequest, :with => :bad_request_error
+    rescue_from ActionController::ParameterMissing do |exception|     
+    redirect_to home_path 
+    flash[:notice] = "Add a file to upload!"
+    end
 
   def index
     @sample_uploads = SampleUpload.all
@@ -19,13 +22,9 @@ class SampleUploadsController < ApplicationController
   def create 
     @sample_upload = SampleUpload.new(sample_upload_params)
     SampleUploaderService.call(sample_upload_params[:attachment])
-    if @sample_upload.save
-      redirect_to sample_upload_path(@sample_upload)
-      SampleUploadMailer.get_link(sample_upload_params[:email]).deliver_later
-    else
-      flash[:notice] = "Add a file to upload"
-      redirect_to root_url
-    end
+    @sample_upload.save
+    redirect_to sample_upload_path(@sample_upload)
+    SampleUploadMailer.get_link(sample_upload_params[:email]).deliver_later
   end
 
   private

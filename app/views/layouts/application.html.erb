@@ -53,23 +53,12 @@
    <li class="nav-item">
     <% if current_user %>
     <a href="<%= user_folders_path(@user, user_id: current_user.id) %>">My folders</i></a>
+    <% end %>
    </li>
-   <% end %>
-     <li class="nav-item dropdown">
-          
-     </li>
-     <%= form_for(@sample_upload, path: '/sample_uploads', method: :post, multipart: true) do |form| %>
-     <div class="form-group">
-      <div class="field">  
-      <%= label_tag :attachment %>
-      <%= form.file_field :attachment %>
-      </div>
-      <div class="action">
-         <i class="fas fa-cloud-download-alt"><%= form.submit%></i>
-      </div>
-    </div>
-      <% end %>
-    </li>
+   
+   <li class="nav-item">
+    <a href="<%= home_path(anchor: 'upload') %>"><i class="fas fa-cloud-download-alt"></i></a>
+  </li>
 </ul>
   <ul class="callme">
     <li>S.F. Uploader</li>
