@@ -1,10 +1,11 @@
-class SampleFolder < ApplicationController
+class SampleFoldersController < ApplicationController
 
   skip_before_action :verify_authenticity_token
-  before_action :set_sample_folder, only: [:show, :update, :edit, :destroy]
+ 
   
   def new
     @sample_folder = SampleFolder.new
+    @sample_upload = SampleUpload.new
   end
 
   def show 
@@ -21,9 +22,9 @@ class SampleFolder < ApplicationController
   private 
 
   def sample_folder_params 
-    params.require(:sample_folder).permit(:url, :deleted_at)
+    params.permit(:url, :deleted_at)
   end
 
-
+end
 
 

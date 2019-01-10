@@ -1,5 +1,5 @@
     <section id="upload" class="section">
-     <%= form_for(@sample_upload, controller: 'sample_uploads', action: 'create', method: :post, multipart: true) do |form| %>
+    <%= form_with(model: [ @sample_folder, @sample_upload ], local: true, multipart: true) do |form| %>
      <div class="form-group">
       <div class="field">  
       <%= label_tag :attachment %>
