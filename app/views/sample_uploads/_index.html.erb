@@ -1,0 +1,26 @@
+<h1>Your Files </h1>
+
+<table data-toggle="table" width="100%" border="0" cellspacing="0" cellpadding="0" style="font-family: 'Mark' ">
+ <thead style="background-color: none; font-family: 'Mark Pro'; font-size: 11px">
+  <tr class="text gray">
+   <th>File</th>
+   <th>URL</th>
+   <th data-sortable="true">Uploaded at</th>
+   <th>Size</th>
+  </tr>
+ </thead>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+ <tbody>
+  <% @sample_uploads.each do |sample_upload| %>
+   <tr>
+   
+    <td><%=url_for(sample_upload.tempfile.path)  %></td>
+    <td><%= sample_upload.created_at  %></td>
+    <td><%= sprintf('%.2f',sample_upload.byte_size/10000.to_f) %>Mb</td>
+    <td><%= link_to 'Preview', sample_upload_path(@sample_upload) %></td>
+   </tr>   
+  <% end %>
+ </tbody>
+</table>
+
+

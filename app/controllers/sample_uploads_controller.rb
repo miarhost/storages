@@ -2,11 +2,13 @@ class SampleUploadsController < ApplicationController
   
   skip_before_action :verify_authenticity_token
   before_action :set_sample_upload, only: [:show]
+  before_action :set_sample_folder
+  
     rescue_from ActionController::ParameterMissing do |exception|     
     redirect_to home_path 
     flash[:notice] = "Add a file to upload!"
     end
-
+ 
   def index
     @sample_uploads = SampleUpload.all
   end
@@ -20,21 +22,25 @@ class SampleUploadsController < ApplicationController
   end
 
   def create 
-    @sample_upload = SampleUpload.new(sample_upload_params)
+    @sample_upload = @sample_folder.sample_uploads.build(sample_upload_params)
     SampleUploaderService.call(sample_upload_params[:attachment])
     @sample_upload.save
-    redirect_to sample_upload_path(@sample_upload)
+    redirect_to @sample_upload
     SampleUploadMailer.get_link(sample_upload_params[:email]).deliver_later
   end
 
   private
 
   def sample_upload_params
-  	 params.require(:sample_upload).permit(:attachment, :email, :id)
+  	params.require(:sample_upload).permit(:attachment, :email, :id, :sample_folder_id)
   end
-  
+
   def set_sample_upload
     @sample_upload = SampleUpload.find(params[:id])
+  end
+  
+  def set_sample_folder
+    @sample_folder = SampleFolder.find(params[:sample_folder_id])
   end
 
 end

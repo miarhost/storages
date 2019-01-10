@@ -9,13 +9,14 @@ Rails.application.routes.draw do
   end
 
   resources :folders do
-  	 resources :items
+  	resources :items
   end
    
   root 'static_pages#home'
   get '/home', to: 'static_pages#home'
 
-  resources :sample_uploads
-  
+  resources :sample_folders do
+    resources :sample_uploads
+  end
 end
 

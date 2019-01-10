@@ -4,7 +4,7 @@ require 'mime/types'
 class SampleUploaderService < ApplicationService
 
   HOST = Rails.env.production? ? 'http://storages.herokuapp.com' : 'http://localhost:3000'
-  BOUNDARY = "AaB03x"
+  BOUNDARY = "XXX"
 
   attr_accessor :attachment
 
@@ -24,26 +24,27 @@ class SampleUploaderService < ApplicationService
 
   def upload
     uri = URI.parse("#{HOST}/sample_uploads") 
-    file = File.open("public/text.txt", "r")
+    file = File.open("public/text.jpg", "r")
     filename = "#{File.basename(file)}"
-    mime_type = MIME::Types.type_for(filename)[0] || MIME::Types["application/octet-stream"][0]
-
+    header = {"Content-Type": "multipart/form-data; boundary=#{BOUNDARY}"}
+    
     post_body = []
     post_body << "--#{BOUNDARY}\r\n"
     post_body << "Content-Disposition: form-data; name=\"datafile\"; filename=\"#{File.basename(file)}\"\r\n"
-    post_body << "Content-Type=#{mime_type}\r\n"
+    post_body << "Content-Type: #{MIME::Types.type_for(file)}\r\n\r\n"
     post_body << "\r\n"
     post_body << File.read(file)
-    post_body << "\r\n--#{BOUNDARY}--\r\n"
+    post_body << "\r\n\r\n--#{BOUNDARY}--\r\n"
 
-    Net::HTTP.start(uri.host, uri.port) do |http|
-      request = Net::HTTP::Post.new(uri.request_uri)
-      request_body = post_body.join
-      request["Content-Type"] =  "multipart/form-data, boundary=#{BOUNDARY}"
-    end
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Post.new(uri.request_uri, header)
+    request.body = post_body.join
+    
+    responce = http.request(request)
   end
 
 end
+
 
 
 
