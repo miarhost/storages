@@ -10,6 +10,7 @@ class SampleFoldersController < ApplicationController
 
   def show 
     @sample_folder = SampleFolder.find(params[:id])
+    @sample_upload = SampleUpload.new
     @sample_uploads = SampleUpload.all
   end
 

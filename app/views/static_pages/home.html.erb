@@ -27,8 +27,13 @@
             </div>
           </div>
         </div>
+
     <section id="upload" class="section">
-     <div>
-         <%= link_to 'Upload', new_sample_folder_path, method: :get %>
+     <%= form_for(@sample_folder, controller: 'sample_folders', action: 'create', method: :post, multipart: true) do |form| %>
+     <div class="form-group">
+      <div class="action">
+         <%= form.button 'Upload', class: 'upload-primary-btn' %>
       </div>
-      </section>
+    </div>
+      <% end %>
+    </section>
