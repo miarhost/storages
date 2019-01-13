@@ -18,29 +18,39 @@ class SampleUploaderService < ApplicationService
 
   def call
   	 upload
+  	 to_s3
   end
 
   private
 
   def upload
     uri = URI.parse("#{HOST}/sample_uploads") 
-    file = File.open("public/text.jpg", "r")
+    file = File.open("public/test.jpg", "r")
     filename = "#{File.basename(file)}"
-    header = {"Content-Type": "multipart/form-data; boundary=#{BOUNDARY}"}
+    
     
     post_body = []
     post_body << "--#{BOUNDARY}\r\n"
-    post_body << "Content-Disposition: form-data; name=\"datafile\"; filename=\"#{File.basename(file)}\"\r\n"
-    post_body << "Content-Type: #{MIME::Types.type_for(file)}\r\n\r\n"
+    post_body << "Content-Disposition: attachment; name=\"datafile\"; filename=\"#{File.basename(file)}\"\r\n"
+    post_body << "Content-Type: application/octet-stream\r\n"
     post_body << "\r\n"
     post_body << File.read(file)
     post_body << "\r\n\r\n--#{BOUNDARY}--\r\n"
 
     http = Net::HTTP.new(uri.host, uri.port)
-    request = Net::HTTP::Post.new(uri.request_uri, header)
+    request = Net::HTTP::Post.new(uri.request_uri)
     request.body = post_body.join
     
-    responce = http.request(request)
+    response = http.request(request)
+    response.body
+  end
+
+  def to_s3
+  	@data = attachment.tempfile
+   s3 = Aws::S3::Resource.new
+   bucket = s3.bucket('storagess')
+   obj = bucket.object('#{@data}')
+  
   end
 
 end

@@ -26,7 +26,9 @@ class SampleUploadsController < ApplicationController
     SampleUploaderService.call(sample_upload_params[:attachment])
     @sample_upload.save
     redirect_to sample_folder_path(@sample_folder)
-    SampleUploadMailer.get_link(sample_upload_params[:email]).deliver_later
+    if @sample_upload.email !=nil
+      SampleUploadMailer.get_link(sample_upload_params[:email]).deliver_later
+    end
   end
 
   private

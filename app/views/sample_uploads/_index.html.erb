@@ -13,7 +13,7 @@
  <tbody>
   <% @sample_folder.sample_uploads.each do |sample_upload| %>
    <tr>
-   
+    
     <td><%=url_for(sample_upload.attachment)  %></td>
     <td><%= sample_upload.created_at  %></td>
     <td><%= sprintf('%.2f',sample_upload.attachment.bytesize/10000.to_f) %>Mb</td>

@@ -1,0 +1,14 @@
+    <section id="upload" class="section">
+      <h3>If you want to get the link for your file on mail, type email adress here: </h3>
+    <%= form_with(model: @sample_upload, url: [ @sample_folder, @sample_upload ], local: true, multipart: true) do |form| %>
+     <div class="form-group">
+      <div class="field">  
+      <%= label_tag :email %>
+      <%= form.email_field :email %>
+      </div>
+      <div class="action">
+         <%= form.submit 'Send', class: 'upload-primary-btn' %>
+      </div>
+    </div>
+      <% end %>
+    </section>
