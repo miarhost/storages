@@ -12,7 +12,7 @@ class SampleUploaderService < ApplicationService
   end
   
   def sample_upload
-  	 @sample_upload ||= SampleUpload.find_by(:attachment)
+    @sample_upload ||= SampleUpload.find_by(:attachment)
   end
 
   def call
@@ -24,12 +24,11 @@ class SampleUploaderService < ApplicationService
 
   def upload
     url = URI.parse("#{HOST}/sample_uploads") 
-    req = Net::HTTP::Post::Multipart.new url.path,
-     "file1" => UploadIO.new(File.new("public/image.jpg"), "image/jpeg", "image.jpg"),
-     "file2" => UploadIO.new(File.new("public/image2.jpg"), "image/jpeg", "image2.jpg"),
-     "file3" => UploadIO.new(File.new("public/image3.jpg"), "image/jpeg", "image3.jpg")
-    res = Net::HTTP.start(url.host, url.port) do |http|
+    File.open("public/image.jpg") do |jpg|
+      req = Net::HTTP::Post::Multipart.new(url)
+      res = Net::HTTP.start(url.host, url.port) do |http|
       http.request(req)
+      end
     end
   end
 
