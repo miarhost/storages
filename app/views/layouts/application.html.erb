@@ -68,7 +68,7 @@
       <% if !user_signed_in? %>
                      
         <li><span><%= link_to 'Register', new_user_registration_path %></span> | </li>
-        <li><span><%= link_to 'Login', new_user_session_path %></span> | </li>
+        <li><a href="#" data-toggle="modal" data-target="#modal-login" class="btn btn-primary">Login</a> | </li>
                         <% else %>
           <li><%= link_to 'Edit Profile', edit_user_registration_path %> | </li>
           <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, :class => 'navbar-link' %></li>                               
@@ -88,6 +88,13 @@
 </div>  
  </nav>
 </div>
+
+ <!-- MODAL SIGN-IN -->
+      <div id="modal-login" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">
+        <%= render 'users/sessions/login_modal', resource: User.new, resource_name: :user, devise_mapping: Devise.mappings[:user] %>
+      </div>
+     <!--MODAL SIGN-IN END -->
+
     
           <div id="modal" tabindex="-1" 
            role="dialog" aria-hidden="false" class="modal fade">

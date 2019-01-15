@@ -1911,3 +1911,171 @@ a.list-group-item.active > .badge,
   font-family: 'Mark';
   font-style: light;
 }
+
+#login-modal {
+  overflow: hidden;
+}
+#login-modal .modal-header h4 {
+  text-transform: uppercase;
+}
+#login-modal form {
+  margin-bottom: 24px;
+}
+#login-modal a {
+  color: #ff7473;
+}
+#login-modal p {
+  font-weight: 300;
+  margin-bottom: 24px;
+  font-size: 15px;
+}
+.modal-backdrop {
+  z-index: 1035;
+}
+/* modal */
+
+.modal-open {
+ overflow: hidden;
+ padding: 0px !important;
+}
+
+.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom {
+    padding-right:0px!important;
+}
+
+.modal-backdrop {
+  z-index: 600;
+}
+
+.modalhome-main-image {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.modalhome-main-image img {
+    max-width: 1000px;
+    border-radius: 5px;
+}
+
+.modal-content {
+  background-color: #ffffff;
+
+  border-radius: 5px;
+}
+
+/*
+=====================
+NAVBAR
+=====================
+
+*/
+.header {
+  width: 100%;
+}
+.navbar {
+
+  font-weight: 700;
+  box-shadow: 0 1px 5px #666;
+}
+@media (min-width: 768px) {
+  .navbar ul.nav > li > a {
+    border-top: solid 5px transparent;
+    padding-top: 23px;
+  }
+  .navbar ul.nav > li > a:hover {
+    border-top-color: #ff7473;
+  }
+  .navbar ul.nav > li.active > a,
+  .navbar ul.nav > li.open > a {
+    text-decoration: none !important;
+    border-top-color: #ff7473;
+  }
+}
+.navbar-toggle {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #41a6ca;
+}
+ul.dropdown-menu li a {
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+ul.dropdown-menu li a:hover {
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+#login-modal {
+  overflow: hidden;
+}
+#login-modal .modal-header h4 {
+  text-transform: uppercase;
+}
+#login-modal form {
+  margin-bottom: 24px;
+}
+#login-modal a {
+  color: #ff7473;
+}
+#login-modal p {
+  font-weight: 300;
+  margin-bottom: 24px;
+  font-size: 15px;
+}
+.modal-backdrop {
+  z-index: 1035;
+}
+
+.ekko-lightbox-container {
+  position: relative;
+}
+.ekko-lightbox-nav-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+}
+.ekko-lightbox-nav-overlay a {
+  z-index: 100;
+  display: block;
+  width: 49%;
+  height: 100%;
+  font-size: 30px;
+  color: #fff;
+  opacity: 0;
+  text-decoration: none !important;
+  -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+.ekko-lightbox-nav-overlay a:empty {
+  width: 49%;
+  color: transparent;
+}
+.ekko-lightbox a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  opacity: 1;
+  color: #fff;
+}
+.ekko-lightbox .glyphicon-chevron-left {
+  left: 0;
+  float: left;
+  padding-left: 15px;
+  text-align: left;
+}
+.ekko-lightbox .glyphicon-chevron-right {
+  right: 0;
+  float: right;
+  padding-right: 15px;
+  text-align: right;
+}
+.ekko-lightbox .modal-footer {
+  text-align: left;
+}

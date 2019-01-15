@@ -26,6 +26,7 @@ gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'aws-sdk-s3', '~> 1.9', '>= 1.9.1'
 gem 'fog-aws', '~> 2.0'
 gem 'mime-types', '~> 3.2', '>= 3.2.2'
+gem 'multipart-post'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do

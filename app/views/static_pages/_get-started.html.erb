@@ -1,0 +1,37 @@
+<div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+              <h4 class="modal-title text-center">Sign In</h4>
+            </div>
+            <div class="modal-body">
+             
+              <%= form_for(:user,  url: session_path(user)) do |f| %>
+                                            
+              <%=  f.email_field :email, autofocus: true, placeholder: 'name@email.com', class: 'form-control' %>
+         <div class="field">
+              <%= f.label :password %><br />
+              <%= f.password_field :password, autocomplete: "current-password" %>
+         </div>
+
+                <p class="text-center">
+                 
+               
+   <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password, autocomplete: "current-password" %>
+  </div>
+
+                 <%= f.button 'Sign Up', class: 'btn btn-primary', type: 'submit' %>
+                  </p>
+                  </div>
+                 <% end %>
+                </div>
+               <div class="actions"><i img src="<%= asset_path 'google.png' %>"></i>
+
+                 <p class="text-center text-muted">Sign in in Google</p>
+             </div>
+            </div>
+          </div>
+        </div>
+       </div>

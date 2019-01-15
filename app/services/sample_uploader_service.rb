@@ -1,10 +1,9 @@
 require 'net/http'
 require 'mime/types'
-
+require 'net/http/post/multipart'
 class SampleUploaderService < ApplicationService
 
   HOST = Rails.env.production? ? 'http://storages.herokuapp.com' : 'http://localhost:3000'
-  BOUNDARY = "XXX"
 
   attr_accessor :attachment
 
@@ -24,25 +23,14 @@ class SampleUploaderService < ApplicationService
   private
 
   def upload
-    uri = URI.parse("#{HOST}/sample_uploads") 
-    file = File.open("public/test.jpg", "r")
-    filename = "#{File.basename(file)}"
-    
-    
-    post_body = []
-    post_body << "--#{BOUNDARY}\r\n"
-    post_body << "Content-Disposition: attachment; name=\"datafile\"; filename=\"#{File.basename(file)}\"\r\n"
-    post_body << "Content-Type: application/octet-stream\r\n"
-    post_body << "\r\n"
-    post_body << File.read(file)
-    post_body << "\r\n\r\n--#{BOUNDARY}--\r\n"
-
-    http = Net::HTTP.new(uri.host, uri.port)
-    request = Net::HTTP::Post.new(uri.request_uri)
-    request.body = post_body.join
-    
-    response = http.request(request)
-    response.body
+    url = URI.parse("#{HOST}/sample_uploads") 
+    req = Net::HTTP::Post::Multipart.new url.path,
+     "file1" => UploadIO.new(File.new("public/image.jpg"), "image/jpeg", "image.jpg"),
+     "file2" => UploadIO.new(File.new("public/image2.jpg"), "image/jpeg", "image2.jpg"),
+     "file3" => UploadIO.new(File.new("public/image3.jpg"), "image/jpeg", "image3.jpg")
+    res = Net::HTTP.start(url.host, url.port) do |http|
+      http.request(req)
+    end
   end
 
   def to_s3
@@ -50,7 +38,6 @@ class SampleUploaderService < ApplicationService
    s3 = Aws::S3::Resource.new
    bucket = s3.bucket('storagess')
    obj = bucket.object('#{@data}')
-  
   end
 
 end
