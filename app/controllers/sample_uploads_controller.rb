@@ -29,9 +29,6 @@ class SampleUploadsController < ApplicationController
         flash[:notice] = "File can't be saved"
         redirect_to home_path
       end
-      if @sample_upload.email != nil
-        SampleUploadMailer.get_link(sample_upload_params[:email]).deliver_later
-      end
   end
 
   def download 

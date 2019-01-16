@@ -1,6 +1,6 @@
     <section id="upload" class="section">
       <h3>If you want to get the link for uploads on mail, type email adress here: </h3>
-    <%= form_with(model: @sample_upload, url: [ @sample_folder, @sample_upload ], local: true, multipart: true) do |form| %>
+    <%= form_with(model: @get_link, local: true, multipart: true) do |form| %>
      <div class="form-group">
       <div class="field">  
       <%= label_tag :email %>

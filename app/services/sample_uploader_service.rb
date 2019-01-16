@@ -36,7 +36,7 @@ class SampleUploaderService < ApplicationService
   	@data = attachment.tempfile
    s3 = Aws::S3::Resource.new
    bucket = s3.bucket('storagess')
-   obj = bucket.object('#{@data}')
+   obj = bucket.object("#{@data}")
   end
 
 end

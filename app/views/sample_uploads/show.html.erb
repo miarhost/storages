@@ -1,9 +1,15 @@
+<% if @sample_upload.attachment.attached? %>
+<p>
 <strong>link:</strong>
-<td><%= truncate(url_for(@sample_upload.attachment), length:54) if @sample_upload.attachment.attached? %></td>
-
+ <% if Rails.env.production? %>
+    <td><%= geturl(@sample_upload.attachment) %></td>
+  <% else %>
+   <td><%= truncate(url_for(@sample_upload.attachment), length:54) %></td>
+  <% end %>
+</p>
 
 <strong>File:</strong>
-<p id="notice"><%= @sample_upload.attachment.filename if @sample_upload.attachment.attached? %></p>
+<p id="notice"><%= @sample_upload.attachment.filename %></p>
 
 <p>
 	<strong>Preview: </strong><br>
@@ -13,3 +19,4 @@
    
    <p><%= link_to 'Delete this file', sample_folder_sample_upload_path(@sample_folder, @sample_upload), method: :delete, data: { confirm: 'Are you sure?' } %></p>
    <p><%= link_to 'Back to Folder', sample_folder_path(@sample_folder) %></p>
+<% end %>
