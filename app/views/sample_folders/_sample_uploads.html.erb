@@ -16,10 +16,9 @@
     <td><%= sample_upload.attachment.filename if sample_upload.attachment.attached? %></td>
     <td><%= sample_upload.attachment.created_at if sample_upload.attachment.attached? %></td>
     <td><%= sprintf('%.2f',sample_upload.attachment.byte_size/10000.to_f)  if sample_upload.attachment.attached? %>Mb</td>
- 
+    <td><%= link_to 'Overview', sample_folder_sample_upload_path(@sample_folder, sample_upload) %></td>
     <td><%= link_to 'Download',  rails_blob_path(sample_upload.attachment, disposition: "attachment"), controller: 'sample_uploads',action: 'download', method: 'get', notice: "Get your file" if sample_upload.attachment.attached? %></td>
-   </tr>   
-   </tr>   
+  </tr>   
   <% end %>
  </tbody>
 </table>

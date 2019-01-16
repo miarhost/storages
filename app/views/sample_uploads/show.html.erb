@@ -1,5 +1,5 @@
 <strong>link:</strong>
-<p id="notice"><%= url_for(@sample_upload) if @sample_upload.attachment.attached? %></p>
+<td><%= truncate(url_for(@sample_upload.attachment), length:54) if @sample_upload.attachment.attached? %></td>
 
 
 <strong>File:</strong>
