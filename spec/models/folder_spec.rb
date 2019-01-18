@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Folder, type: :model do
   before(:each) do
-   	subject { Folder.new{title: "Content", description: "user's description", user_id: 1} }
+   	subject { Folder.new(title: "Content", description: "user's description", user_id: 1) }
   end
 
   describe "ActiveRecord relations" do

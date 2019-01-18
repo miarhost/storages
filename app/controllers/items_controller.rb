@@ -2,6 +2,10 @@ class ItemsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
   before_action :set_folder
+    rescue_from ActionController::ParameterMissing do |exception|     
+    redirect_to home_path 
+    flash[:notice] = "Add a file to upload!"
+    end
 
   def index
  	  @items = Item.all
@@ -20,27 +24,30 @@ class ItemsController < ApplicationController
   def create
     @item = @folder.items.build(item_params)
     @item.folder.user_id = current_user.id
+    attachment = params[:item][:attachment]
+      respond_to do |format|
       if @item.save
-        flash[:success] = "File added to your folder"
-        redirect_to folder_path(@folder)
+          if attachment
+            @item.attachment.attach(attachment)
+          end
+        format.html { redirect_to @folder, notice: "File was added to your folder"}
+        format.json { render :show, status: :created, location: @folder }
       else
-        flash[:notice] = "File can't be saved"
-        redirect_to folders_path(@folders)
+        format.html { render :new }
+        format.json { render json: @item.errors, status: :enprocessable_entity }
       end
+    end
   end
-
+ 
   def destroy
  	  @item = Item.find(params[:id])
  	  @item.destroy
  	  respond_to do |format|
+
  	    format.html { redirect_to folder_path(@folder), notice: 'File is deleted!' }
       format.json { head :no_content }
     end
   end
-
-  def upload_to_gc
-    GcAttachmentUploaderService.call(params[:attachment])
-  end 
 
   def download 
     @item.attachment.download

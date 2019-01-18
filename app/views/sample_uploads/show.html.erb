@@ -1,11 +1,7 @@
 <% if @sample_upload.attachment.attached? %>
 <p>
 <strong>link:</strong>
- <% if Rails.env.production? %>
-    <td><%= geturl(@sample_upload.attachment) %></td>
-  <% else %>
-   <td><%= truncate(url_for(@sample_upload.attachment), length:54) %></td>
-  <% end %>
+  <td><%= @sample_upload.attachment.service_url %></td>
 </p>
 
 <strong>File:</strong>

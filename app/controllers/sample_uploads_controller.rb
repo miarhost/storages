@@ -2,7 +2,9 @@ class SampleUploadsController < ApplicationController
   
   skip_before_action :verify_authenticity_token
   before_action :set_sample_folder
-
+  before_action do
+    ActiveStorage::Current.host = request.base_url
+  end
     rescue_from ActionController::ParameterMissing do |exception|     
     redirect_to home_path 
     flash[:notice] = "Add a file to upload!"
@@ -22,13 +24,19 @@ class SampleUploadsController < ApplicationController
 
   def create 
     @sample_upload = @sample_folder.sample_uploads.build(sample_upload_params)
-      if @sample_upload.save
-        flash[:success] = "File added to your folder"
-        redirect_to sample_folder_path(@sample_folder)
-      else
-        flash[:notice] = "File can't be saved"
-        redirect_to home_path
-      end
+     attachment = params[:sample_upload][:attachment]
+     respond_to do |format|
+       if @sample_upload.save
+          if attachment
+            @sample_upload.attachment.attach(attachment)
+          end
+        format.html { redirect_to @sample_folder, notice: "File was added to your folder"}
+        format.json { render :show, status: :created, location: @sample_folder }
+       else
+        format.html { render :new }
+        format.json { render json: @sample_upload.errors, status: :enprocessable_entity }
+       end
+    end
   end
 
   def download 
