@@ -40,7 +40,6 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :amazon
-
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
@@ -64,7 +63,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "storages_#{Rails.env}"
   config.action_mailer.default_url_options = { host: 'storages.herokuapp.com' }
   config.action_mailer.perform_caching = false
-
+ 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false

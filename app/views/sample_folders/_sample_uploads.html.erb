@@ -17,11 +17,7 @@
    <% if sample_upload.attachment.attached? %>
    <tr>
     <td><%= sample_upload.attachment.filename %></td>
-  <% if Rails.env.production? %>
-    <td><%= geturl(sample_upload.attachment) %></td>
-  <% else %>
-   <td><%= truncate(url_for(sample_upload.attachment), length:54) %></td>
-  <% end %>
+    <td><%= sample_upload.attachment.service_url %></td>
     <td><%= sample_upload.attachment.created_at %></td>
     <td><%= sprintf('%.2f',sample_upload.attachment.byte_size/10000.to_f) %>Mb</td>
     <td><%= link_to 'Overview', sample_folder_sample_upload_path(@sample_folder, sample_upload) %></td>
@@ -31,4 +27,3 @@
   </tr>   
   <% end %>
  </tbody>
-</table>

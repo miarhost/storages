@@ -1,8 +1,7 @@
 class SampleFoldersController < ApplicationController
-
+ 
   skip_before_action :verify_authenticity_token
-
-  
+    
   def new
     @sample_folder = SampleFolder.new
   end

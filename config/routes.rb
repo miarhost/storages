@@ -19,4 +19,3 @@ Rails.application.routes.draw do
     resources :sample_uploads
   end
 end
-

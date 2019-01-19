@@ -1,10 +1,8 @@
 class SampleUploadsController < ApplicationController
-  
+  include Geturlable
   skip_before_action :verify_authenticity_token
   before_action :set_sample_folder
-  before_action do
-    ActiveStorage::Current.host = request.base_url
-  end
+
     rescue_from ActionController::ParameterMissing do |exception|     
     redirect_to home_path 
     flash[:notice] = "Add a file to upload!"
