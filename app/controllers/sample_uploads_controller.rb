@@ -1,5 +1,6 @@
 class SampleUploadsController < ApplicationController
   include Geturlable
+  include S3Service
   skip_before_action :verify_authenticity_token
   before_action :set_sample_folder
 
