@@ -50,7 +50,16 @@ class SampleUploadsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
+  def geturl
+    attachment = params[:sample_upload][:attachment]
+    s3 = Aws::S3::Resource.new
+    bucket = s3.bucket('storagess')
+    obj = bucket.object("#{attachment}") 
+    url = "https://s3.eu-west-2.amazonaws.com/#{bucket}/#{obj.key}"
+    url
+  end 
+  
   private
 
   def sample_upload_params
