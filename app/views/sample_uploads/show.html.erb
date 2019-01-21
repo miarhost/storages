@@ -1,7 +1,7 @@
 <% if @sample_upload.attachment.attached? %>
 <p>
 <strong>link:</strong>
-  <td><%= @sample_upload.attachment.service_url %></td>
+  <td><%= cover_url(@sample_upload.attachment) %></td>
 </p>
 
 <strong>File:</strong>

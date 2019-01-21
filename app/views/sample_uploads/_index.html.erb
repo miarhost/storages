@@ -7,19 +7,24 @@
    <th>URL</th>
    <th data-sortable="true">Uploaded at</th>
    <th>Size</th>
+   <th>Open</th>
+   <th>Download</th>
   </tr>
  </thead>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
  <tbody>
   <% @sample_folder.sample_uploads.each do |sample_upload| %>
+   <% if sample_upload.attachment.attached? %>
    <tr>
-    <td><%= sample_upload.attachment.filename if sample_upload.attachment.attached? %></td>
-    <td><%= sample_upload.attachment.created_at if sample_upload.attachment.attached? %></td>
-    <td><%= sprintf('%.2f',sample_upload.attachment.byte_size/10000.to_f)  if sample_upload.attachment.attached? %>Mb</td>
+    <td><%= sample_upload.attachment.filename %></td>
+    <td><%= link_to(polymorphic_url(sample_upload.attachment)) %></td>
+    <td><%= sample_upload.attachment.created_at %></td>
+    <td><%= sprintf('%.2f',sample_upload.attachment.byte_size/10000.to_f) %>Mb</td>
     <td><%= link_to 'Overview', sample_folder_sample_upload_path(@sample_folder, sample_upload) %></td>
-    <td><%= link_to 'Download',  rails_blob_path(sample_upload.attachment, disposition: "attachment"), controller: 'sample_uploads',action: 'download', method: 'get', notice: "Get your file" if sample_upload.attachment.attached? %></td>
-   </tr>   
+    <td><%= link_to 'Download',  rails_blob_path(sample_upload.attachment, disposition: "attachment"), controller: 'sample_uploads',action: 'download', method: 'get', notice: "Get your file" %></td>
+   <% else %>
+   <% end %>
+  </tr>   
   <% end %>
  </tbody>
-</table>
 
