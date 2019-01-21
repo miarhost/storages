@@ -7,7 +7,7 @@ class SampleUpload < ApplicationRecord
 	 scope :with_eager_loaded_attachment, -> { eager_load(attachment_attachment: :blob) }
 
   def cover_url 
-    rails_blob_path(self.cover, disposition: "attachment", only_path: true)
+    rails_blob_path(self.service_url, disposition: "attachment", only_path: true)
   end
 
 

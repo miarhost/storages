@@ -17,7 +17,7 @@
    <% if sample_upload.attachment.attached? %>
    <tr>
     <td><%= sample_upload.attachment.filename %></td>
-    <td><%= link_to(polymorphic_url(sample_upload.attachment)) %></td>
+    <td><%= link_to(rails_blob_path sample_upload.attachment, only_path: true) %></td>
     <td><%= sample_upload.attachment.created_at %></td>
     <td><%= sprintf('%.2f',sample_upload.attachment.byte_size/10000.to_f) %>Mb</td>
     <td><%= link_to 'Overview', sample_folder_sample_upload_path(@sample_folder, sample_upload) %></td>

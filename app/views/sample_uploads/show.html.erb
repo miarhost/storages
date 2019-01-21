@@ -1,7 +1,7 @@
 <% if @sample_upload.attachment.attached? %>
 <p>
 <strong>link:</strong>
-  <td><%= cover_url(@sample_upload.attachment) %></td>
+  <td><%= rails_blob_path @sample_upload.attachment, only_path: true %></td>
 </p>
 
 <strong>File:</strong>
