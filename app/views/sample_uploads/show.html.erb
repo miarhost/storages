@@ -1,18 +1,23 @@
-<% if @sample_upload.attachment.attached? %>
-<p>
+<% if @sample_upload.singleupload.attached? %>
 <strong>link:</strong>
-  <td><%= link_to(geturl) %></td>
+ <% if Rails.env.production? %>
+<p>
+  <td><%= truncate(@sample_upload.service_url, length: 69) %></td>
 </p>
-
+ <% else %>
+<p>
+	 <td><%= truncate(url_for(@sample_upload.singleupload), length: 54) %></td>
+</p>
+ <% end %>
 <strong>File:</strong>
-<p id="notice"><%= @sample_upload.attachment.filename %></p>
+<p id="notice"><%= @sample_upload.singleupload.filename %></p>
 
 <p>
 	<strong>Preview: </strong><br>
-  <%= image_tag @sample_upload.attachment if @sample_upload.attachment.attached? %>
+  <%= image_tag @sample_upload.singleupload %>
 </p>
 
    
-   <p><%= link_to 'Delete this file', sample_folder_sample_upload_path(@sample_folder, @sample_upload), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-   <p><%= link_to 'Back to Folder', sample_folder_path(@sample_folder) %></p>
+<p><%= link_to 'Delete this file', sample_folder_sample_upload_path(@sample_folder, @sample_upload), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+<p><%= link_to 'Back to Folder', sample_folder_path(@sample_folder) %></p>
 <% end %>

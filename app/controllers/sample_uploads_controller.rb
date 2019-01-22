@@ -23,11 +23,11 @@ class SampleUploadsController < ApplicationController
 
   def create 
     @sample_upload = @sample_folder.sample_uploads.build(sample_upload_params)
-     attachment = params[:sample_upload][:attachment]
+     singleupload = params[:sample_upload][:singleupload]
      respond_to do |format|
        if @sample_upload.save
-          if attachment
-            @sample_upload.attachment.attach(attachment)
+          if singleupload
+            @sample_upload.singleupload.attach(singleupload)
           end
         format.html { redirect_to @sample_folder, notice: "File was added to your folder"}
         format.json { render :show, status: :created, location: @sample_folder }
@@ -39,7 +39,7 @@ class SampleUploadsController < ApplicationController
   end
 
   def download 
-    @sample_upload.attachment.download
+    @sample_upload.singleupload.download
   end
   
   def destroy
@@ -51,19 +51,10 @@ class SampleUploadsController < ApplicationController
     end
   end
   
-  def geturl
-    attachment = params[:sample_upload][:attachment]
-    s3 = Aws::S3::Resource.new
-    bucket = s3.bucket('storagess')
-    obj = bucket.object("#{attachment}") 
-    url = "https://s3.eu-west-2.amazonaws.com/#{bucket}/#{obj.key}"
-    url
-  end 
-  
   private
 
   def sample_upload_params
-  	params.require(:sample_upload).permit(:attachment, :email, :id, :sample_folder_id)
+  	params.require(:sample_upload).permit(:singleupload, :email, :id, :sample_folder_id)
   end
   
   def set_sample_folder
