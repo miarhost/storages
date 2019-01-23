@@ -6,7 +6,7 @@
 </p>
  <% else %>
 <p>
-	 <td><%= truncate(url_for(@sample_upload.singleupload), length: 54) %></td>
+	 <td><%= link_to rails_blob_path(@sample_upload.singleupload, disposition: "attachment") %></td>
 </p>
  <% end %>
 <strong>File:</strong>

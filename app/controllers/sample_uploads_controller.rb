@@ -61,4 +61,4 @@ class SampleUploadsController < ApplicationController
     @sample_folder = SampleFolder.find(params[:sample_folder_id])
   end
 
-end
+end 

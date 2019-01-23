@@ -8,8 +8,8 @@ class FoldersController < ApplicationController
   end
   
   def index
-    @user = User.find_by(params[:user_id])
       if admin_session
+      @user = User.find_by(params[:user_id])
       @folders = Folder.where(user_id: @user.id)
       else
   	  @folders = Folder.where(user_id: current_user.id)
