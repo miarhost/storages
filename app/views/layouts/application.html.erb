@@ -26,7 +26,7 @@
     <div role="navigation" class="navbar navbar-default topnav">
       <div class="navbar-header">
       <a href="<%= admins_path %>" class="navbar-brand">
-                <img src="<%= asset_path 'fish.jpg' %>" class="visible-xs visible-sm">
+                <img src="<%= asset_path 'fish.png' %>" class="visible-xs visible-sm">
                 <span class="sr-only">Home</span>
       </a>
    </div>
@@ -67,14 +67,14 @@
      <% if !admin_session %>
       <% if !user_signed_in? %>
                      
-        <li><span><%= link_to 'Register', new_user_registration_path %></span> | </li>
-        <li><a href="#" data-toggle="modal" data-target="#modal-login" class="btn btn-primary">Login</a> | </li>
-                        <% else %>
-          <li><%= link_to 'Edit Profile', edit_user_registration_path %> | </li>
-          <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, :class => 'navbar-link' %></li>                               
-      <% end %> 
+        <li><%= link_to 'Register ', new_user_registration_path, :class => 'navbar-link' %> |  </li>
+        <li><a href="#" data-toggle="modal" data-target="#modal-login" class="navbar-link"> Login</a><i class="fas fa-sign-in-alt"></i></li>
       <% else %>
-       <li><%= link_to 'Logout', destroy_admin_session_path, method: :delete, :class => 'navbar-link' %></li>   
+          <li><%= link_to 'Edit Profile', edit_user_registration_path %> | </li>
+          <li><%= link_to ' Logout', destroy_user_session_path, method: :delete, :class => 'navbar-link' %></li>                               
+      <% end %> 
+     <% else %>
+       <li><%= link_to ' Logout', destroy_admin_session_path, method: :delete, :class => 'navbar-link' %></li>   
     <% end %>   
          </ul>
         </div>

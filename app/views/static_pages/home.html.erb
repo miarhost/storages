@@ -1,4 +1,27 @@
-<h1> FILE SERVICE </h1> 
+<h1> FILE SERVICE </h1>
+<!-- button to anonymous upload --> 
+   <section id="upload" class="section">
+        <div class="bar background-image-fixed-1 no-mb color-white text-center">
+          <div class="dark-mask"></div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="icon"><i class="fa fa-file-code-o"></i></div>
+                <h1> Upload Files Here </h1>
+                <p class="lead">and get a direct link</p>
+                <p class="text-center"><%= form_for(@sample_folder, controller: 'sample_folders', action: 'create', method: :post, multipart: true) do |form| %></p>
+              
+                    <div class="action">
+         <%= form.button 'Upload', :class => 'btn btn-primary' %></p>
+      </div>
+      <% end %>
+      </div>
+    </div>
+            </div>
+          </div>
+        </div>
+  </section>
+<!-- service listing columns with texts -->        
 <section id="integrations" class="section-gray">
   <div class="container clearfix">
     <div class="row services">
@@ -27,13 +50,3 @@
             </div>
           </div>
         </div>
-
-    <section id="upload" class="section">
-     <%= form_for(@sample_folder, controller: 'sample_folders', action: 'create', method: :post, multipart: true) do |form| %>
-     <div class="form-group">
-      <div class="action">
-         <%= form.button 'Upload', class: 'upload-primary-btn' %>
-      </div>
-    </div>
-      <% end %>
-    </section>
