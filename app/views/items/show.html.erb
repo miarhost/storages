@@ -1,18 +1,19 @@
+<% if @item.attachment.attached? %>
+ <strong>File:</strong>
+ <p id="notice"><%= @item.attachment.filename %></p>
 
-<strong>File:</strong>
-<p id="notice"><%= @item.attachment.filename if @item.attachment.attached? %></p>
-
-<p>
+ <p>
   <strong>Views:</strong>
-  <%= @item.views if @item.attachment.attached? %>
-</p>
+  <%= @item.views %>
+ </p>
 
-<p>
-	<strong>Preview: </strong><br>
-  <%= image_tag @item.attachment if @item.attachment.attached? %>
-</p>
-
+ <p>
+	 <strong>Preview: </strong><br>
+  <%= image_tag @item.attachment.variant(resize: "300x300") %>
+ </p>
+<% else %>
+<% end %>
    
-   <p><%= link_to 'Delete this file', folder_item_path(@folder, @item), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-   <p><%= link_to 'Back to Folder', folder_path(@folder) %></p>
+ <p><%= link_to 'Delete this file', folder_item_path(@folder, @item), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+ <p><%= link_to 'Back to Folder', folder_path(@folder) %></p>
 

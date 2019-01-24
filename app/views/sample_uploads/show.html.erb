@@ -2,7 +2,7 @@
 <strong>link:</strong>
  <% if Rails.env.production? %>
 <p>
-  <td><%= truncate(@sample_upload.service_url, length: 69) %></td>
+  <td><%= link_to truncate(@sample_upload.singleupload.service_url, length: 69) %></td>
 </p>
  <% else %>
 <p>
@@ -14,7 +14,7 @@
 
 <p>
 	<strong>Preview: </strong><br>
-  <%= image_tag @sample_upload.singleupload %>
+  <%= image_tag @sample_upload.singleupload.variant(resize: "300x300") %>
 </p>
 
    

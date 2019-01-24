@@ -18,7 +18,7 @@
    <tr>
     <td><%= sample_upload.singleupload.filename %></td>
      <% if Rails.env.production? %>
-    <td><%= truncate(sample_upload.singleupload.service_url, length: 69) %></td>
+    <td><%= link_to sample_upload.singleupload.service_url %></td>
      <% else %>
     <td><%= link_to rails_blob_path(sample_upload.singleupload,disposition: "attachment") %></td>
      <% end %>

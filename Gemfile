@@ -19,6 +19,7 @@ gem 'jquery-turbolinks', '~> 2.1'
 gem 'will_paginate', '~> 3.1.1'
 gem 'glyphicons-rails', '~> 0.1.2'
 gem 'mini_magick'
+gem "image_processing", "~> 1.0"
 gem 'oauth2', '~> 1.2'
 gem 'omniauth-google-oauth2', '~> 0.5.3'
 gem 'google-api-client', '~> 0.8'
