@@ -66,9 +66,8 @@
   <ul class="logreg">
      <% if !admin_session %>
       <% if !user_signed_in? %>
-                     
-        <li><%= link_to 'Register ', new_user_registration_path, :class => 'navbar-link' %> |  </li>
-        <li><a href="#" data-toggle="modal" data-target="#modal-login" class="navbar-link"> Login</a><i class="fas fa-sign-in-alt"></i></li>
+         <li><a href="#" data-toggle="modal" data-target="#modal-signup" class="navbar-link"> Register </a></li>            
+         <li><a href="#" data-toggle="modal" data-target="#modal-login" class="navbar-link"> Login</a><i class="fas fa-sign-in-alt"></i></li>
       <% else %>
           <li><%= link_to 'Edit Profile', edit_user_registration_path %> | </li>
           <li><%= link_to ' Logout', destroy_user_session_path, method: :delete, :class => 'navbar-link' %></li>                               
@@ -90,11 +89,13 @@
 </div>
 
  <!-- MODAL SIGN-IN -->
-      <div id="modal-login" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">
+      <div id="modal-login" tabindex="-1" role="dialog" aria-labelledby="Register" aria-hidden="true" class="modal fade">
         <%= render 'users/sessions/login_modal', resource: User.new, resource_name: :user, devise_mapping: Devise.mappings[:user] %>
       </div>
      <!--MODAL SIGN-IN END -->
-
+      <div id="modal-signup" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">
+        <%= render 'users/registrations/signup_modal', resource: User.new, resource_name: :user, devise_mapping: Devise.mappings[:user] %>
+      </div>
     
           <div id="modal" tabindex="-1" 
            role="dialog" aria-hidden="false" class="modal fade">
