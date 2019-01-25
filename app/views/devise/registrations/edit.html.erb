@@ -1,46 +1,110 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<aside>
+    <div id="sidebar" class="nav-collapse">
+         <div class="leftside-navigation">
+            <ul class="sidebar-menu" id="nav-accordion">
+                <li>
+                    <a class="active" href="#">
+                        <i class="fa fas-dashboard"></i>
+                        <h2> My Profile </h2>
+                    </a>
+                </li>
+                
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fas fa-book"></i>
+                        <span>Customizing Preferences</span>
+                    </a>
+                 <ul class="sub">
+                  <li><a href="#">Fonts</a></li>
+                  <li><a href="#">Icons</a></li>
+                  <li><a href="#">Pix</a></li>
+                 </ul>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fas fa-bullhorn"></i>
+                     <span>Share </span>
+                  </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                      <i class="fas fa-th"></i>
+                      <span>My Data </span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="#">Folders</a></li>
+                        <li><a href="#">Files</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fas fa-tasks"></i>
+                        <span>Change My Profile</span>
+                    </a>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
-
-  <div class="field">
+                </li>
+                <li class="sub-menu">
+                  <a href="javascript:;">
+                    <i class="fas fas-envelope"></i>
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+                  </a>
+                  <ul class="sub">
+                    <li>
+                      <a href="javascript:;">
+                      <%= f.label :name %><br />
+                      <%= f.text_field :name %>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="javascript:;">
+                      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
     <% if @minimum_password_length %>
       <br />
       <em><%= @minimum_password_length %> characters minimum</em>
     <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+                      </a>
+                    </li>
+                    <li>
+                     <a href="javascript:;">    
+      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
+                     </a>
+                    </li>
+                </ul>
+             <li class="sub-menu">
+              <a href="javascript:;">
+               <div class="actions">
+                <i class="fas fa-bullhorn"></i>
+                 <%= f.submit "Update" %>
+               </div>
+              </a>
+             </li>
+    <% end %>
+      </ul>
+        </li>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+        <li class="sub-menu">
+         <a href="javascript:;">
+          <i class=" fas fa-bar-chart-o"></i>
+            <h3>Cancel my account</h3>
+         </a>
+              <ul class="sub">
+                  <li>
+                    <a href="#">
+                      <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+                    </a>
+                  </li>
+              </ul>
+        </li>
+        <li>
+           <a href="<%= link_to "Back", :back %>">
+            <i class="fas fa-user"></i>
+              <span>Login Page</span>
+           </a>
+        </li>
+  </ul>            </div>
+</div>
+</aside>

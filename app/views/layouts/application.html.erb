@@ -92,11 +92,11 @@
       <div id="modal-login" tabindex="-1" role="dialog" aria-labelledby="Register" aria-hidden="true" class="modal fade">
         <%= render 'users/sessions/login_modal', resource: User.new, resource_name: :user, devise_mapping: Devise.mappings[:user] %>
       </div>
-     <!--MODAL SIGN-IN END -->
+ <!--MODAL SIGN-UP-->
       <div id="modal-signup" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">
         <%= render 'users/registrations/signup_modal', resource: User.new, resource_name: :user, devise_mapping: Devise.mappings[:user] %>
       </div>
-    
+ <!--MODAL SIGN-UP END-->
           <div id="modal" tabindex="-1" 
            role="dialog" aria-hidden="false" class="modal fade">
            

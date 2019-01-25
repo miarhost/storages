@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 HOST = Rails.env.production? ? 'http://storages.herokuapp.com' : 'http://localhost:3000'
-CALLBACK_URL = 'http://#{HOST}/users/auth/google_oauth2/callback'
+CALLBACK_URL = "#{HOST}/users/auth/google_oauth2/callback"
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
