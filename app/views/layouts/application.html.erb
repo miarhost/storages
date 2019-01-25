@@ -69,7 +69,7 @@
          <li><a href="#" data-toggle="modal" data-target="#modal-signup" class="navbar-link"> Register </a></li>            
          <li><a href="#" data-toggle="modal" data-target="#modal-login" class="navbar-link"> Login</a><i class="fas fa-sign-in-alt"></i></li>
       <% else %>
-          <li><%= link_to 'Edit Profile', edit_user_registration_path %> | </li>
+          <li><%= link_to 'Dashboard', edit_user_registration_path %> | </li>
           <li><%= link_to ' Logout', destroy_user_session_path, method: :delete, :class => 'navbar-link' %></li>                               
       <% end %> 
      <% else %>
