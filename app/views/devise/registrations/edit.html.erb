@@ -41,39 +41,42 @@
                         <i class="fas fa-tasks"></i>
                         <span>Change My Profile</span>
                     </a>
+                 <ul class="sub">
+                  <li>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
-                </li>
-                <li class="sub-menu">
+                  </li>
+                  <li>
                   <a href="javascript:;">
-                    <i class="fas fas-envelope"></i>
+                    <i class="fas fa-envelope"></i>
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
                   </a>
-                  <ul class="sub">
-                    <li>
-                      <a href="javascript:;">
+                 </li>
+                 <li>
+                  <a href="javascript:;">
                       <%= f.label :name %><br />
                       <%= f.text_field :name %>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="javascript:;">
-                      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+                  </a>
+                 </li>
+                 <li>
+                  <a href="#">
+    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
     <% if @minimum_password_length %>
       <br />
       <em><%= @minimum_password_length %> characters minimum</em>
     <% end %>
-                      </a>
-                    </li>
-                    <li>
-                     <a href="javascript:;">    
+                  </a>
+                 </li>
+                 <li>
+                     <a href="#">    
       <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
                      </a>
-                    </li>
-                </ul>
+                 </li>
+              </ul>
+            </li>
              <li class="sub-menu">
               <a href="javascript:;">
                <div class="actions">
@@ -109,6 +112,5 @@
 </div>
 </aside>
 
-<section class="section">
+
   <%= render partial: 'folders' %>
- </section>
