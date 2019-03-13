@@ -23,18 +23,18 @@ class SampleUploadsController < ApplicationController
 
   def create 
     @sample_upload = @sample_folder.sample_uploads.build(sample_upload_params)
-     singleupload = params[:sample_upload][:singleupload]
-     respond_to do |format|
-       if @sample_upload.save
-          if singleupload
-            @sample_upload.singleupload.attach(singleupload)
-          end
+    singleupload = params[:sample_upload][:singleupload]
+    respond_to do |format|
+      if @sample_upload.save
+        if singleupload
+          @sample_upload.singleupload.attach(singleupload)
+        end
         format.html { redirect_to @sample_folder, notice: "File was added to your folder"}
         format.json { render :show, status: :created, location: @sample_folder }
-       else
+      else
         format.html { render :new }
         format.json { render json: @sample_upload.errors, status: :enprocessable_entity }
-       end
+      end
     end
   end
 

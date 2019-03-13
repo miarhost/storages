@@ -16,8 +16,8 @@ class SampleUploaderService < ApplicationService
   end
 
   def call
-  	 upload
-  	 to_s3
+  	upload
+  	to_s3
   end
 
   private
@@ -34,11 +34,10 @@ class SampleUploaderService < ApplicationService
 
   def to_s3
   	@data = attachment.tempfile
-   s3 = Aws::S3::Resource.new
-   bucket = s3.bucket('storagess')
-   obj = bucket.object("#{@data}")
+    s3 = Aws::S3::Resource.new
+    bucket = s3.bucket('storagess')
+    obj = bucket.object("#{@data}")
   end
-
 end
 
 

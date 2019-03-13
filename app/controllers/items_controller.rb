@@ -2,10 +2,10 @@ class ItemsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
   before_action :set_folder
-    rescue_from ActionController::ParameterMissing do |exception|     
+  rescue_from ActionController::ParameterMissing do |exception|     
     redirect_to home_path 
     flash[:notice] = "Add a file to upload!"
-    end
+  end
 
   def index
  	  @items = Item.all
@@ -27,9 +27,9 @@ class ItemsController < ApplicationController
     attachment = params[:item][:attachment]
       respond_to do |format|
       if @item.save
-          if attachment
-            @item.attachment.attach(attachment)
-          end
+        if attachment
+          @item.attachment.attach(attachment)
+        end
         format.html { redirect_to @folder, notice: "File was added to your folder"}
         format.json { render :show, status: :created, location: @folder }
       else
@@ -43,7 +43,6 @@ class ItemsController < ApplicationController
  	  @item = Item.find(params[:id])
  	  @item.destroy
  	  respond_to do |format|
-
  	    format.html { redirect_to folder_path(@folder), notice: 'File is deleted!' }
       format.json { head :no_content }
     end

@@ -8,12 +8,12 @@ class FoldersController < ApplicationController
   end
   
   def index
-      if admin_session
+    if admin_session
       @user = User.find_by(params[:user_id])
       @folders = Folder.where(user_id: @user.id)
-      else
+    else
   	  @folders = Folder.where(user_id: current_user.id)
-      end
+    end
   end
 
   def edit; end
