@@ -18,4 +18,7 @@ Rails.application.routes.draw do
   resources :sample_folders do
     resources :sample_uploads
   end
+
+  resources :get_links
+  
 end

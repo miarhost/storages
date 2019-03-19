@@ -10,6 +10,7 @@ class SampleFoldersController < ApplicationController
     @sample_folder = SampleFolder.find(params[:id])
     @sample_upload = SampleUpload.new
     @sample_uploads = @sample_folder.sample_uploads
+    @get_link = GetLink.new
   end
 
   def create 

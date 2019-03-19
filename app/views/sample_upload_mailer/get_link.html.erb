@@ -1,5 +1,10 @@
 <div class="center jumbotron">
 <h2>Your file upload link</h2>
-<p>Hello, you uploaded a file to <%= HOST %> and can now find it or share by this link: ! </p>
+<p>Hello, you uploaded a file to S.F.Uploader and can now find it or share by this link:
+     <% if Rails.env.production? %>
+    <td><%= @sample_upload.singleupload.service_url %></td>
+     <% else %>
+    <td><%= url_for(@sample_upload.singleupload) %></td>
+     <% end %> ! </p>
 
 
