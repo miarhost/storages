@@ -9,10 +9,13 @@ class FoldersController < ApplicationController
   
   def index
     if admin_session
-      @user = User.find_by(params[:user_id])
+      @user = User.find(params[:user_id])
       @folders = Folder.where(user_id: @user.id)
-    else
+    elsif user_session
+      @user = current_user
   	  @folders = Folder.where(user_id: current_user.id)
+    else
+      redirect_to root_path, notice: 'Please login'
     end
   end
 
