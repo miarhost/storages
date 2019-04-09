@@ -2,12 +2,10 @@ require 'rails_helper'
 
 RSpec.describe SampleUploadsController, type: :controller do
   let(:sample_folder) { create(:sample_folder) }
+  let(:sample_upload) { create(:sample_upload) }
 
   describe 'POST#create' do
   	 context 'with required attachment' do
-  	 	 before do
-  	 		  post :create
-  	 	 end
 
   	 	 it 'returns 200' do
   	 		  expect(response.status).to eq(200)

@@ -54,7 +54,7 @@ class SampleUploadsController < ApplicationController
   private
 
   def sample_upload_params
-  	params.require(:sample_upload).permit(:singleupload, :email, :id, :sample_folder_id)
+  	params.require(:sample_upload).permit(:singleupload, :id, :sample_folder_id)
   end
   
   def set_sample_folder
