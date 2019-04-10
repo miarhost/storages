@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :sample_upload do
-    singleupload do
-      File.open(File.join(Rails.root, '/spec/fixtures/files/deathclaw.png'))
+    trait :with_singleupload do
+      singleupload { fixture_file_upload(Rails.root.join('spec', 'fixtures', 'files', 'deathclaw.png'), 'image/png') }
     end
   end
 end
