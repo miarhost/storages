@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SampleUploadsController, type: :controller do
-  let(:sample_folder) { create(:sample_folder) }
+  let(:sample_folder) { create :sample_folder }
   let(:sample_upload) { create :sample_upload, :with_singleupload }
 
   describe 'POST#create' do
@@ -9,7 +9,7 @@ RSpec.describe SampleUploadsController, type: :controller do
        let(:singleupload) { fixture_file_upload(Rails.root.join('spec', 'fixtures', 'files', 'deathclaw.png'), 'image/png') }
        
        def trigger 
-         post :create, params: { singleupload: singleupload } 
+         post :create, params: { sample_upload: { singleupload: singleupload, sample_folder_id: sample_folder.id } }
        end
 
   	 	 it 'returns 200' do
@@ -17,7 +17,7 @@ RSpec.describe SampleUploadsController, type: :controller do
   	 	 end
 
   	 	 it 'uploads a file to a folder' do
-  	     expect { trigger }.to change(ActiveStorage::Attachment, :count).by(1)      
+  	     expect { trigger }.to change(ActiveStorage::Attachment, :count).by(1) 
        end
   	 end
   end

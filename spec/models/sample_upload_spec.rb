@@ -10,7 +10,7 @@ RSpec.describe SampleUpload, type: :model do
 
   describe "ActiveRecord relations" do 
     it "should have one attached attachment" do
-      expect(:sample_upload).to have_one_attached(:attachment)
+      expect(:sample_upload).to have_one_attached(:singleupload)
     end
     it "should belong to sample folder" do 
     	 expect(:sample_upload).to belong_to(:sample_folder)
@@ -19,7 +19,7 @@ RSpec.describe SampleUpload, type: :model do
 
   describe "ActiveModel validations" do
   	 it "should validate presence of attachment" do
-  	   expect(:sample_upload).to validate_presence_of(:attachment)
+  	   expect(:sample_upload).to validate_presence_of(:singleupload)
   	 end
   end
  
