@@ -4,7 +4,7 @@ RSpec.describe SampleUpload, type: :model do
 
 	before do 
 		 subject { Aws::S3::Resource.new(bucket: s3.bucket('storagess'), object: bucket.object) }
- end
+  end
 
   let(:sample_upload) { SampleUpload.new }
 

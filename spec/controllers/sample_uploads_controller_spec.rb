@@ -9,9 +9,9 @@ RSpec.describe SampleUploadsController, type: :controller do
        let(:singleupload) { fixture_file_upload(Rails.root.join('spec', 'fixtures', 'files', 'deathclaw.png'), 'image/png') }
        
        def trigger 
-         post :create, params: { sample_upload: { singleupload: singleupload, sample_folder_id: sample_folder.id } }
+         post :create, params: { sample_upload: singleupload, sample_folder_id: sample_folder.id }        end
        end
-
+       
   	 	 it 'returns 200' do
   	 		  expect(response.status).to eq(200)
   	 	 end
