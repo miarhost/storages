@@ -55,7 +55,7 @@ class ItemsController < ApplicationController
   private 
 
   def item_params
- 	  params.require(:item).permit(:attachment, :folder_id, :id, :views)
+ 	  params.require(:item).permit(:attachment)
   end
 
   def set_folder

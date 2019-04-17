@@ -6,11 +6,12 @@
   <strong>Views:</strong>
   <%= @item.views %>
  </p>
-
+  <% if @sample_upload.respond_to?(:image) %>
  <p>
-	 <strong>Preview: </strong><br>
+ 	<strong>Preview: </strong><br>
   <%= image_tag @item.attachment.variant(resize: "300x300") %>
  </p>
+ <% end %>
 <% else %>
 <% end %>
    

@@ -13,9 +13,11 @@
 <p id="notice"><%= @sample_upload.singleupload.filename %></p>
 
 <p>
-	<strong>Preview: </strong><br>
-  <%= image_tag @sample_upload.singleupload.variant(resize: "300x300") %>
+	  <% if @sample_upload.respond_to?(:image) %>
+	  <strong>Preview: </strong><br>
+   <%= image_tag @sample_upload.singleupload.variant(resize: "300x300") %>
 </p>
+   <% end %>
 
    
 <p><%= link_to 'Delete this file', sample_folder_sample_upload_path(@sample_folder, @sample_upload), method: :delete, data: { confirm: 'Are you sure?' } %></p>
