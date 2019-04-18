@@ -4,6 +4,5 @@ class GetLink < ApplicationRecord
   validates :email,
     presence: true,
     length: { minimum: 10, maximum: 255 },
-    format: {with: VALID_EMAIL_REGEX },
-    uniqueness: true
-end
+    format: {with: VALID_EMAIL_REGEX }
+ end
