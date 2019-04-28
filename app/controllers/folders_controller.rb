@@ -13,7 +13,8 @@ class FoldersController < ApplicationController
       @folders = Folder.where(user_id: @user.id)
     elsif user_session
       @user = current_user
-  	  @folders = Folder.where(user_id: current_user.id)
+  	  @folders = Folder.includes(:user).where(user_id: current_user.id)
+        .order("created_at DESC")
     else
       redirect_to root_path, notice: 'Please login'
     end
