@@ -22,3 +22,5 @@ test:
 production:
   <<: *default
   database: storages_production
+  username: ubuntu
+  password: 
