@@ -3,7 +3,7 @@
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
-server "ec2-54-158-71-242.compute-1.amazonaws.com", user: "ubuntu", roles: %w{app db web}
+server "ec2-54-174-255-135.compute-1.amazonaws.com", user: "ubuntu", roles: %w{app db web}
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value server "db.example.com", user: "deploy", roles: %w{db}
 
 
@@ -41,9 +41,9 @@ server "ec2-54-158-71-242.compute-1.amazonaws.com", user: "ubuntu", roles: %w{ap
 # Global options
 # --------------
   set :ssh_options, {
-    keys: %w(/home/rghost/.ssh/id_rsa),
-    forward_agent: false,
-    auth_methods: %w(password)
+    keys: %w(/home/rghost/.ssh/ecnew1.pem),
+    forward_agent: true,
+    auth_methods: %w(publickey)
   }
 #
 # The server-based syntax can be used to override options:
