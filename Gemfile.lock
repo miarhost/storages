@@ -384,6 +384,8 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3, >= 3.3.7)
   bootstrap-table-rails (~> 1.12, >= 1.12.1)
   byebug
+  capistrano (~> 3.11)
+  capistrano-bundler (~> 1.5)
   capistrano-rails (~> 1.4)
   capistrano-rvm
   capybara (>= 2.15)
