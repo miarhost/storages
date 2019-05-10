@@ -1,24 +1,6 @@
-# README
+# storages
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+uploads users' content of different types directly on amazon s3 bucket, each per folder. 
+Unregistered users can upload files as 'sample' terminated later.
+Registered users have profile/dashboard with folders, can be signed in with google oauth.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

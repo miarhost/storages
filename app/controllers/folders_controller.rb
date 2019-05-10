@@ -15,6 +15,7 @@ class FoldersController < ApplicationController
       @user = current_user
   	  @folders = Folder.includes(:user).where(user_id: current_user.id)
         .order("created_at DESC")
+        .paginate(page: params[:page], per_page: 5)
     else
       redirect_to root_path, notice: 'Please login'
     end
