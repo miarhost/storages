@@ -20,5 +20,13 @@ Rails.application.routes.draw do
   end
 
   resources :get_links
+
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [:index, :show] do 
+       resources :folders
+      end
+    end
+  end
   
 end
