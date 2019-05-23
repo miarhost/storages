@@ -21,9 +21,9 @@ Rails.application.routes.draw do
 
   resources :get_links
 
-  namespace :api do
+  namespace :api, defaults: { format:'json' } do
     namespace :v1 do
-      post 'auth', to: 'authentications#authorize'
+      post 'auth' => 'authentications#authorize'
       resources :users, param: :name, only: [:index, :show] do 
         resources :folders
       end
