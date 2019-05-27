@@ -2,13 +2,14 @@ require 'authentication_token'
 module Api
   module V1
     class ApplicationController < ActionController::Base
-      
-      attr_reader :payload, :current_user
+
+      protect_from_forgery unless: -> { request.format.json? }    
+
       rescue_from ActionController::ParameterMissing, with: :file_absent
-      before_action :not_authorized
+      #before_action :not_authorized
 
       def current_user
-        @current_user ||= super || User.find_by(params[:email])
+        @current_user ||= super || User.find_by(email: params[:email])
       end
 
       protected

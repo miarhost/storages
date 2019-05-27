@@ -2,22 +2,23 @@ require 'jwt'
 require 'openssl'
 
 class AuthenticationToken
-  
-  attr_reader :rsa_public, :rsa_private
 
-  def initialize
-    @rsa_private = OpenSSL::PKey::RSA.generate 2048
-    @rsa_public = @rsa_private.public_key
-  end
+  RSA_PRIVATE = OpenSSL::PKey::RSA.generate 2048
+  RSA_PUBLIC = RSA_PRIVATE.public_key
 
   def self.encode(payload) 
-    JWT.encode(payload, @rsa_private, 'RS256')
-    rescue JWT::InvalidPayload  
+    begin
+      @token = JWT.encode(payload, RSA_PRIVATE, 'RS256')
+      rescue JWT::InvalidPayload  
+    end
   end
 
   def self.decode(token)
-    JWT.decode(token, @rsa_public, true, { algorithm: 'RS256' })
-    rescue JWT::DecodeError
+    token = @token
+    begin
+      return @decoded_token = JWT.decode(@token, RSA_PUBLIC, true, { algorithm: 'RS256' })
+      rescue JWT::DecodeError
+    end
   end
 
   def self.expired(payload)

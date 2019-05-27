@@ -3,11 +3,12 @@ module Api
     class AuthenticationsController < Api::V1::ApplicationController
 
       def authorize
+        Rails.logger.info(request.headers)
         begin
-      	  user ||= User.find_by(email: params[:email])
+      	  current_user
         rescue ActiveRecord::RecordNotUnique
         end
-      	if @user.valid_password?(password: params[:password])
+      	if @current_user.valid_password?(password: params[:password])
       	 	render json: authorized(user), status: 200
         else 
           render json: not_authorized, status: 406
@@ -20,10 +21,11 @@ module Api
       end
 
       def authorized(user)
+        begin
       	{
-      	 	token = JWT.encode({id: user.id})
-      	 	user = {id: user.id, email: user.email}
-      	 }
+      	 	token:  AuthenticationToken.encode({id: user.id}),
+      	 	user: {id: user.id, email: user.email}
+      	}
       	rescue 
       		nil
       	end
