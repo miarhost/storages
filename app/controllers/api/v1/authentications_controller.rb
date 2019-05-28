@@ -3,24 +3,20 @@ module Api
     class AuthenticationsController < Api::V1::ApplicationController
 
       def authorize
-        Rails.logger.info(request.headers)
         begin
-      	  current_user
-        rescue ActiveRecord::RecordNotUnique
+      	  user ||= User.find_by(email: params[:email])
+        rescue ActiveRecord::RecordNotFound
         end
-      	if @current_user.valid_password?(password: params[:password])
+      	if user && user.valid_password?(password: params[:password])
       	 	render json: authorized(user), status: 200
+          authorize_with_token
         else 
-          render json: not_authorized, status: 406
+          render json: { message: 'Not authenticated' }, status: 406
       	end
       end
 
-      def auth_token(token)
-        token = @token
-        @auth_token ||= AuthenticationToken.decode(token)
-      end
-
       def authorized(user)
+        user ||= User.find_by(email: params[:email])
         begin
       	{
       	 	token:  AuthenticationToken.encode({id: user.id}),

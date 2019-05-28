@@ -3,15 +3,10 @@ module Api
   module V1
     class ApplicationController < ActionController::Base
 
-      protect_from_forgery unless: -> { request.format.json? }    
-
+      protect_from_forgery unless: -> { request.format.json? }  
       rescue_from ActionController::ParameterMissing, with: :file_absent
-      #before_action :not_authorized
-
-      def current_user
-        @current_user ||= super || User.find_by(email: params[:email])
-      end
-
+      attr_accessor :user
+      
       protected
 
       def file_absent
@@ -20,21 +15,28 @@ module Api
       end
 
       def authorize_with_token
+        user ||= User.find_by(email: params[:email])
+        Rails.logger.info(user).inspect
+        if user && user.authenticate!(password: params[:password])
+          render json: auth_token
+        else
+          render json: { message: 'Not authenticated' }, status: 406
+        end
         @token = request.headers['Autorization'].split(' ').last
         @auth_token = AuthenticationToken.decode(token)
+      end
+      
+
+      def auth_token(token)
+        token = @token
+        @auth_token ||= AuthenticationToken.decode(token)
       end
 
       def payload(user)
         {
-        auth_token: AuthenticationToken.encode({user_id: current_user.id}),
-        user: {id: current_user.id, email: current_user.email}
+        token: AuthenticationToken.encode({user_id: user.id}),
+        user: {id: user.id, email: user.email}
         }
-      end
-
-      def not_authorized
-        unless payload(user: current_user)
-          render json: { message: 'Not authenticated' }, status: 406
-        end 
       end
     end
   end
