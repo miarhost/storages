@@ -7,13 +7,14 @@ module Api
       	  user ||= User.find_by(email: params[:email])
         rescue ActiveRecord::RecordNotFound
         end
-      	if user && user.valid_password?(password: params[:password])
-      	 	render json: authorized(user), status: 200
-          authorize_with_token
+      	if user && user.valid_password?(params[:password])
+         	render json: authorized(user), status: 200
         else 
           render json: { message: 'Not authenticated' }, status: 406
       	end
       end
+
+      private
 
       def authorized(user)
         user ||= User.find_by(email: params[:email])

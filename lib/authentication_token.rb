@@ -8,15 +8,14 @@ class AuthenticationToken
 
   def self.encode(payload) 
     begin
-      @token = JWT.encode(payload, RSA_PRIVATE, 'RS256')
+      token = JWT.encode(payload, RSA_PRIVATE, 'RS256')
       rescue JWT::InvalidPayload  
     end
   end
 
   def self.decode(token)
-    token = @token
     begin
-      return @decoded_token = JWT.decode(@token, RSA_PUBLIC, true, { algorithm: 'RS256' })
+      return @decoded = JWT.decode(token, RSA_PUBLIC, true, { algorithm: 'RS256' })
       rescue JWT::DecodeError
     end
   end
