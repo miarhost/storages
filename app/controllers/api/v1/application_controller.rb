@@ -5,18 +5,28 @@ module Api
 
       protect_from_forgery unless: -> { request.format.json? }  
       rescue_from ActionController::ParameterMissing, with: :file_absent
+      attr_reader :user
 
       protected
 
-      def authorize_with_token
+      def authorize
         begin
-          user ||= User.find_by(@auth_token[:user_id])
-        rescue JWT::DecodeError
+          @user ||= User.find_by(email: params[:email])
+        rescue ActiveRecord::RecordNotFound
         end
-        if user
-          render json: { message: 'Authorized'}, status: 200
+        if @user && @user.valid_password?(params[:password])
+          render json: authorized(@user), status: 200
+          @token = AuthenticationToken.encode(@payload)
+        else 
+          render json: { message: 'Not authenticated' }, status: 406
+        end
+      end
+
+      def authorize_with_token
+        if request.headers['x-user-id'] == user
+          return
         else
-          render json: { message: 'Not authenticated' }, status: 418
+          render json: { message: 'Not authenticated' }, status: 406
         end
       end
 
@@ -27,13 +37,21 @@ module Api
 
       private
 
-      def payload
-        head = request.headers['Authorization'].split(' ').last if request.headers['Authorization'].present?
-        @token = AuthenticationToken.encode(head)
+      def authorized(user)
+        begin
+          @payload = 
+        {
+          token:  AuthenticationToken.encode({id: @user.id}),
+          user: {id: @user.id, email: @user.email}
+        }
+        rescue 
+          nil
+        end
       end
 
       def auth_token
         @auth_token = AuthenticationToken.decode(@token)
+        Rails.logger.info(@auth_token).inspect
       end
     end
   end
