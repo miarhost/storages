@@ -5,7 +5,7 @@ module Api
   	 	before_action :authorize_with_token
 
   	   def index
-  	   	 @users = Folder.joins(:user).group(:user_id).count(:user_id)
+  	   	 @users = Folder.joins(:user).group(:user_id)
         render json: @users
   	   end
     end

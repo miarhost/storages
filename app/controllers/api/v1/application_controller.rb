@@ -32,12 +32,12 @@ module Api
 
       def file_absent
         logger.error "Couldn't attach file to a folder"
-        redirect_to root_url, notice: 'No files attached'
+        redirect_back(fallback_location: new_box_upload_path, notice: "No files attached.") 
       end
 
       private
 
-      def authorized(user)
+      def authorized!(user)
         begin
           @payload = 
         {
@@ -50,8 +50,9 @@ module Api
       end
 
       def auth_token
-        @auth_token = AuthenticationToken.decode(@token)
+        auth_token = AuthenticationToken.decode(@token)
         Rails.logger.info(@auth_token).inspect
+        auth_token
       end
     end
   end
