@@ -1,0 +1,14 @@
+<section id="upload" class="section">
+  <h3>Pick your file: </h3>
+  <%= form_with(model: @box_upload, local: true, multipart: true) do |form| %>
+    <div class="form-group"> 
+      <div class="field">
+        <%= label_tag :box_file %>
+        <%= form.file_field :box_file %>
+      </div>
+      <div class="action">
+      	 <%= form.submit 'Upload', class: 'primary primary-btn' %>
+      </div>
+    </div>
+  <% end %>
+</section>

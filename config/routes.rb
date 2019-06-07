@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       resources :users, param: :name, only: [:index, :show] do 
         resources :folders
       end
+      resources :box_uploads
     end
   end
   

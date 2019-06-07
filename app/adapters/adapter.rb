@@ -6,7 +6,7 @@ module Adapter
     end
 
     def direct_uploads(data)
-    	 @client.upload(data)
+    	 @client.put_file('/storage/db/#{data}', open('/tmp/db/#{data}'))
     end
   end
 end

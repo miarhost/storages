@@ -1,0 +1,2 @@
+class BoxUpload < ApplicationRecord
+end

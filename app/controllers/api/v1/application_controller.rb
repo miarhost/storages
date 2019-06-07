@@ -4,7 +4,6 @@ module Api
     class ApplicationController < ActionController::Base
 
       protect_from_forgery unless: -> { request.format.json? }  
-      rescue_from ActionController::ParameterMissing, with: :file_absent
       attr_reader :user
 
       protected
@@ -30,12 +29,7 @@ module Api
         end
       end
 
-      def file_absent
-        logger.error "Couldn't attach file to a folder"
-        redirect_back(fallback_location: new_box_upload_path, notice: "No files attached.") 
-      end
-
-      private
+   private
 
       def authorized!(user)
         begin
