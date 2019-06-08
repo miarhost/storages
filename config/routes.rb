@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :folders
   end
+  resources :box_uploads
 
   resources :folders do
   	resources :items
@@ -30,5 +31,4 @@ Rails.application.routes.draw do
       resources :box_uploads
     end
   end
-  
 end

@@ -6,6 +6,9 @@
         <%= label_tag :box_file %>
         <%= form.file_field :box_file %>
       </div>
+      <div class="hidden-field">
+      	  <%= form.hidden_field :user_id %>
+      </div>
       <div class="action">
       	 <%= form.submit 'Upload', class: 'primary primary-btn' %>
       </div>

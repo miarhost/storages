@@ -3,6 +3,7 @@ module Adapter
 
     def initialize
       @client = DropboxClient.new(ENV['ACCESS_TOKEN'])
+      puts "linked account:", client.account_info().inspect
     end
 
     def direct_uploads(data)
