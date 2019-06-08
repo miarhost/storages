@@ -6,6 +6,6 @@ class BoxUploader
   end
 
   def direct_box
-    @adapter.direct_uploads(@box_upload.box_file)
+    @adapter.direct_uploads(@box_upload.box_file.filename.to_s)
   end
 end

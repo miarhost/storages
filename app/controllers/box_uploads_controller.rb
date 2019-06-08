@@ -15,7 +15,7 @@ class BoxUploadsController < ApplicationController
       @box_upload.save
     end
     if @box_upload.save
-      BoxUpload.new(@box_upload.box_file).direct_box
+      BoxUploader.new(@box_upload).direct_box
       respond_to do |format| 
         format.html { redirect_to api_v1_box_uploads_url, notice: "File was added to your account"}
         format.json { render :ok, status: :created, location: @box_upload }
@@ -24,6 +24,8 @@ class BoxUploadsController < ApplicationController
       file_absent
     end
   end
+
+  private
 
   def box_upload_params
     params.require(:box_upload).permit(:box_file)
