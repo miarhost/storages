@@ -5,8 +5,9 @@ module Api
   	 	before_action :authorize_with_token
 
   	   def index
-  	   	 @users = Folder.joins(:user).group(:user_id)
-        render json: @users
+  	   	 sql = "SELECT * FROM Folders LEFT OUTER JOIN Users ON folders.user_id = Users.id;"
+  	   	 @users = ActiveRecord::Base.connection.execute(sql)
+  	   	 render json: @users
   	   end
     end
   end

@@ -1,7 +1,8 @@
 module Api
   module V1
     class BoxUploadsController < Api::V1::ApplicationController
-
+      before_action :authorize_with_token
+      
     	 def index
         box_uploads = BoxUpload.where(user_id: params[:user_id])
                                .order('created_at DESC') 
