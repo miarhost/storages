@@ -41,7 +41,7 @@
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>
-
+<%= link_to "Share on Dropbox", new_box_upload_path(@box_upload), class: 'upload-primary-btn' %>
 
 <aside>
     <div id="sidebar" class="nav-collapse">
