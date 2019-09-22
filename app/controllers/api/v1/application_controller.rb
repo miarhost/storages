@@ -29,7 +29,7 @@ module Api
         end
       end
 
-   private
+      private
 
       def authorized!(user)
         begin
