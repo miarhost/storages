@@ -36,9 +36,9 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   FactoryBot.definition_file_paths = %w(spec/factories/*.rb)
   FactoryBot.find_definitions
-  FactoryBot::SyntaxRunner.class_eval do
-    include ActionDispatch::TestProcess
-  end
+  # FactoryBot::SyntaxRunner.class_eval do
+  #  include ActionDispatch::TestProcess
+  #end
   config.before(:suite) do
     begin
       DatabaseCleaner.start

@@ -1,4 +1,4 @@
-module FilesTestHelper
+module FilesTestHelpers
   extend self
   extend ActionDispatch::TestProcess
 
