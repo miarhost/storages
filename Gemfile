@@ -23,7 +23,7 @@ gem 'jquery-ui-rails'
 gem 'jwt'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-turbolinks', '~> 2.1'
-gem "image_processing", "~> 1.0"
+gem "image_processing", "~> 1.12"
 gem 'mini_magick'
 gem 'mime-types', '~> 3.2', '>= 3.2.2'
 gem 'multipart-post'
